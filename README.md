@@ -1,10 +1,12 @@
 # gumby
-Gumby Search Engine
+Gumby Search Engine - A search engine for climbers
 
-Building a climbing search engine
+Repository: Azure Cosmos DB via Graph API
 
-Stack:
--Cosmos DB
--Azure Search
--Azure Functions (Serverless)
--React / React Native
+API: Azure Functions (Serverless)
+
+Engine: Azure Search (Using Azure functions to update index)
+
+Web UX: React (Hosted on Azure Storage for static websites)
+
+App UX: React Native
