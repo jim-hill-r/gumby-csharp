@@ -1,37 +1,59 @@
 ﻿@page "/"
 @page "/index.html"
 
+    <style>
+        .app-fab--fixed {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+        }
+    </style>
+
 <MatAppBarContainer>
     <MatAppBar Fixed="true">
         <MatAppBarRow>
             <MatAppBarSection>
-                <MatIconButton Icon="menu"></MatIconButton>
+                <MatIconButton OnClick="@ToggleDrawer" Icon="menu"></MatIconButton>
                 <MatAppBarTitle>Gumby</MatAppBarTitle>
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
-                <MatIconButton Icon="person"></MatIconButton>
+                <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
-
     <MatAppBarContent>
-        <MatButton OnClick="@OpenAddClimbModal" Raised="true">Add Climb</MatButton>
+        <MatDrawerContainer Style="width: 100vw; height: 100vw;">
+            <MatDrawer Opened="@_isOpenDrawer">
+                <MatList SingleSelection="true" TwoLine="true">
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>
+                                <NavLink href="/">Home</NavLink>
+                            </MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                </MatList>
+            </MatDrawer>
+        </MatDrawerContainer>
     </MatAppBarContent>
-
-    <MatDialog IsOpen="@_isOpenAddClimbModal">
-        <MatDialogTitle>Add Climb</MatDialogTitle>
-        <MatDialogContent>
-            <MatIcon Icon="camera"></MatIcon>
-        </MatDialogContent>
-        <MatDialogActions>
-            <MatButton OnClick="@CancelAddClimbClicked">Cancel</MatButton>
-            <MatButton OnClick="@OkAddClimbClicked">OK</MatButton>
-        </MatDialogActions>
-    </MatDialog>
 </MatAppBarContainer>
+
+<MatFAB class="app-fab--fixed" OnClick="@OpenAddClimbModal" Icon="@MatIconNames.Add"></MatFAB>
+
+<MatDialog IsOpen="@_isOpenAddClimbModal">
+    <MatDialogTitle>Add Climb</MatDialogTitle>
+    <MatDialogContent>
+        <MatIcon Icon="camera"></MatIcon>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@CancelAddClimbClicked">Cancel</MatButton>
+        <MatButton OnClick="@OkAddClimbClicked">OK</MatButton>
+    </MatDialogActions>
+</MatDialog>
 
 @functions{
     private bool _isOpenAddClimbModal = false;
+    private bool _isOpenDrawer = false;
 
     void OpenAddClimbModal()
     {
@@ -46,6 +68,11 @@
     void CancelAddClimbClicked()
     {
         _isOpenAddClimbModal = false;
+    }
+
+    void ToggleDrawer()
+    {
+        _isOpenDrawer = !_isOpenDrawer;
     }
 
 }
