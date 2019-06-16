@@ -1,1 +1,11 @@
-﻿<Router AppAssembly="typeof(Program).Assembly" />
+﻿<MatThemeProvider Theme="@theme">
+    <Router AppAssembly=typeof(Program).Assembly />
+</MatThemeProvider>
+
+@functions{
+    MatTheme theme = new MatTheme()
+    {
+        Primary = MatThemeColors.LightGreen._500.Value,
+        Secondary = MatThemeColors.LightBlue._500.Value
+    };
+}

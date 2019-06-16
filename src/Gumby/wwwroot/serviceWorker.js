@@ -4,7 +4,6 @@ var filesToCache = [
 
     // Html and css files
     '/index.html',
-    '/css/bootstrap/bootstrap.min.css',
     '/css/site.css',
 
     // PWA files
@@ -34,6 +33,7 @@ var filesToCache = [
     '/_framework/_bin/System.Core.dll',
     '/_framework/_bin/System.dll',
     '/_framework/_bin/System.Net.Http.dll',
+    '/_framework/_bin/MatBlazor.dll',
 
     // Project Assemblies
     '/_framework/_bin/Gumby.dll',

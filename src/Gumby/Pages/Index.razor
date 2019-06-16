@@ -1,6 +1,51 @@
 ﻿@page "/"
 @page "/index.html"
 
-<h1>Hello, guest!</h1>
+<MatAppBarContainer>
+    <MatAppBar Fixed="true">
+        <MatAppBarRow>
+            <MatAppBarSection>
+                <MatIconButton Icon="menu"></MatIconButton>
+                <MatAppBarTitle>Gumby</MatAppBarTitle>
+            </MatAppBarSection>
+            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                <MatIconButton Icon="person"></MatIconButton>
+            </MatAppBarSection>
+        </MatAppBarRow>
+    </MatAppBar>
 
-Welcome to Gumby.
+    <MatAppBarContent>
+        <MatButton OnClick="@OpenAddClimbModal" Raised="true">Add Climb</MatButton>
+    </MatAppBarContent>
+
+    <MatDialog IsOpen="@_isOpenAddClimbModal">
+        <MatDialogTitle>Add Climb</MatDialogTitle>
+        <MatDialogContent>
+            <MatIcon Icon="camera"></MatIcon>
+        </MatDialogContent>
+        <MatDialogActions>
+            <MatButton OnClick="@CancelAddClimbClicked">Cancel</MatButton>
+            <MatButton OnClick="@OkAddClimbClicked">OK</MatButton>
+        </MatDialogActions>
+    </MatDialog>
+</MatAppBarContainer>
+
+@functions{
+    private bool _isOpenAddClimbModal = false;
+
+    void OpenAddClimbModal()
+    {
+        _isOpenAddClimbModal = true;
+    }
+
+    void OkAddClimbClicked()
+    {
+        _isOpenAddClimbModal = false;
+    }
+
+    void CancelAddClimbClicked()
+    {
+        _isOpenAddClimbModal = false;
+    }
+
+}
