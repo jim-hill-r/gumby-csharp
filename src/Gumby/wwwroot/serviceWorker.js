@@ -1,6 +1,7 @@
 ﻿var cacheName = 'gumby-cache';
 var filesToCache = [
     '/',
+    '/favicon.ico',
 
     // Html and css files
     '/index.html',
@@ -9,8 +10,8 @@ var filesToCache = [
     // PWA files
     '/manifest.json',
     '/serviceWorker.js',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png',
+    '/icons/gumby-192x192.png',
+    '/icons/gumby-512x512.png',
 
     // Blazor / WASM framework
     '/_framework/blazor.webassembly.js',
