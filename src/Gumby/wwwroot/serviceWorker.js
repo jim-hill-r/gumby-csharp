@@ -40,7 +40,7 @@ var filesToCache = [
     '/_framework/_bin/Gumby.dll',
 
     // Routed Pages
-    '/ticks'
+
 ];
 
 self.addEventListener('install', function (e) {
