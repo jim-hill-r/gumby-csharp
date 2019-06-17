@@ -9,11 +9,30 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="script" href="serviceWorker.js" />
     <meta name="theme-color" content="#8bc34a" />
+    <style>
+        #spinner {
+            -webkit-animation: rotation 2s infinite linear;
+            position: fixed;
+            top:50%;
+            left:50%;
+            margin-top: -96px;
+            margin-left: -96px;
+        }
+
+        @-webkit-keyframes rotation {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(359deg);
+            }
+        }
+    </style>
+
 </head>
 <body>
     <app>
-        <img id="spinner" src="/icons/gumby-192x192.png" />
-
+        <img id="spinner" src="icons/gumby-192x192.png" />
     </app>
 
     <script src="_framework/blazor.webassembly.js"></script>
