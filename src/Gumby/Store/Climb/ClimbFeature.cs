@@ -1,4 +1,5 @@
 ﻿using Blazor.Fluxor;
+using Gumby.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Gumby.Store.Climb
     public class ClimbFeature : Feature<ClimbState>
     {
         public override string GetName() => "Climb";
-        protected override ClimbState GetInitialState() => new ClimbState(0);
+        protected override ClimbState GetInitialState() => new ClimbState(new List<IClimb>());
     }
 }

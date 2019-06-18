@@ -3,6 +3,7 @@
 
 @using Blazor.Fluxor
 @using Store.Climb
+@using Gumby.Model.Climb
 @inject IState<ClimbState> ClimbState
 @inject IDispatcher Dispatcher
 
@@ -14,7 +15,11 @@
     }
 </style>
 
-Number of climbs added: @ClimbState.Value.NumClimbs
+@foreach(var climb in ClimbState.Value.Climbs)
+{
+    @climb.OccurredAt
+    @climb.RouteName
+}
 
 <MatFAB class="app-fab--fixed" OnClick="@OpenAddClimbModal" Icon="@MatIconNames.Add"></MatFAB>
 
@@ -39,7 +44,7 @@ Number of climbs added: @ClimbState.Value.NumClimbs
 
     void OkAddClimbClicked()
     {
-        Dispatcher.Dispatch(new AddClimbAction());
+        Dispatcher.Dispatch(new AddClimbAction(new ClimbMinimal()));
         _isOpenAddClimbModal = false;
     }
 

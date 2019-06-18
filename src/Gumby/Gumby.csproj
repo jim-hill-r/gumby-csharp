@@ -28,4 +28,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.0.0-preview5-19227-01" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gumby.Contract\Gumby.Contract.csproj" />
+  </ItemGroup>
+
 </Project>
