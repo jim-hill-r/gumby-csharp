@@ -37,7 +37,7 @@ var filesToCache = [
     '/_framework/_bin/MatBlazor.dll',
 
     // Project Assemblies
-    '/_framework/_bin/Gumby.dll',
+    '/_framework/_bin/Gumby.dll'
 
     // Routed Pages
 
