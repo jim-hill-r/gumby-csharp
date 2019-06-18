@@ -10,7 +10,7 @@ namespace Gumby.Store.Climb
     {
         public override ClimbState Reduce(ClimbState state, AddClimbAction action)
         {
-            state.Climbs.Add(action.Climb);
+            state.Climbs.Insert(0,action.Climb);
             return state;
         }
     }

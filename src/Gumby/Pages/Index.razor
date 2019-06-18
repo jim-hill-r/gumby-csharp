@@ -15,11 +15,37 @@
     }
 </style>
 
-@foreach(var climb in ClimbState.Value.Climbs)
-{
-    @climb.OccurredAt
-    @climb.RouteName
-}
+<MatList SingleSelection="true" TwoLine="true">
+    @if (ClimbState.Value.Climbs.Count == 0)
+    {
+        <MatListItem>
+            <MatListItemText>
+                <MatListItemPrimaryText>
+                    Welcome to Gumby Climb!
+                </MatListItemPrimaryText>
+                <MatBlazor.MatListItemSecondaryText>
+                    Click the blue + button below to add your first climb.
+                </MatBlazor.MatListItemSecondaryText>
+            </MatListItemText>
+        </MatListItem>
+    }
+    else
+    {
+        @foreach (var climb in ClimbState.Value.Climbs)
+        {
+            <MatListItem>
+                <MatListItemText>
+                    <MatListItemPrimaryText>
+                        @climb.OccurredAt
+                    </MatListItemPrimaryText>
+                    <MatBlazor.MatListItemSecondaryText>
+                        @climb.RouteName
+                    </MatBlazor.MatListItemSecondaryText>
+                </MatListItemText>
+            </MatListItem>
+        }
+    }
+</MatList>
 
 <MatFAB class="app-fab--fixed" OnClick="@OpenAddClimbModal" Icon="@MatIconNames.Add"></MatFAB>
 
