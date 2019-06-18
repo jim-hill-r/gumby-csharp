@@ -1,13 +1,18 @@
 ﻿@page "/"
 @page "/index.html"
 
-    <style>
-        .app-fab--fixed {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-        }
-    </style>
+@using Blazor.Fluxor
+@using Store.Climb
+@inject IState<ClimbState> ClimbState
+@inject IDispatcher Dispatcher
+
+<style>
+    .app-fab--fixed {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+</style>
 
 <MatAppBarContainer>
     <MatAppBar Fixed="true">
@@ -36,6 +41,8 @@
             </MatDrawer>
         </MatDrawerContainer>
     </MatAppBarContent>
+
+    Number of climbs added: @ClimbState.Value.NumClimbs
 </MatAppBarContainer>
 
 <MatFAB class="app-fab--fixed" OnClick="@OpenAddClimbModal" Icon="@MatIconNames.Add"></MatFAB>
@@ -62,6 +69,7 @@
 
     void OkAddClimbClicked()
     {
+        Dispatcher.Dispatch(new AddClimbAction());
         _isOpenAddClimbModal = false;
     }
 

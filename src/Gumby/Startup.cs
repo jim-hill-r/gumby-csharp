@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Blazor.Fluxor;
 
 namespace Gumby
 {
@@ -7,6 +8,9 @@ namespace Gumby
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddFluxor(options => options
+                .UseDependencyInjection(typeof(Startup).Assembly)
+            );
         }
 
         public void Configure(IComponentsApplicationBuilder app)
