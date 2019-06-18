@@ -3,4 +3,43 @@
 
 @Store.Initialize()
 
-@Body
+<MatAppBarContainer>
+    <MatAppBar Fixed="true">
+        <MatAppBarRow>
+            <MatAppBarSection>
+                <MatIconButton OnClick="@ToggleDrawer" Icon="menu"></MatIconButton>
+                <MatAppBarTitle>Gumby</MatAppBarTitle>
+            </MatAppBarSection>
+            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
+            </MatAppBarSection>
+        </MatAppBarRow>
+    </MatAppBar>
+    <MatAppBarContent>
+        <MatDrawerContainer Style="position: fixed; width: 50vw; height: 100vh;">
+            <MatDrawer Opened="@_isOpenDrawer">
+                <MatList SingleSelection="true" TwoLine="true">
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>
+                                <NavLink href="/">Home</NavLink>
+                            </MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                </MatList>
+            </MatDrawer>
+        </MatDrawerContainer>
+    </MatAppBarContent>
+
+    @Body
+
+</MatAppBarContainer>
+
+@functions{ 
+    private bool _isOpenDrawer = false;
+
+    void ToggleDrawer()
+    {
+        _isOpenDrawer = !_isOpenDrawer;
+    }
+}

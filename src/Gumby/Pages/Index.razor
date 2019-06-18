@@ -14,36 +14,7 @@
     }
 </style>
 
-<MatAppBarContainer>
-    <MatAppBar Fixed="true">
-        <MatAppBarRow>
-            <MatAppBarSection>
-                <MatIconButton OnClick="@ToggleDrawer" Icon="menu"></MatIconButton>
-                <MatAppBarTitle>Gumby</MatAppBarTitle>
-            </MatAppBarSection>
-            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
-                <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
-            </MatAppBarSection>
-        </MatAppBarRow>
-    </MatAppBar>
-    <MatAppBarContent>
-        <MatDrawerContainer Style="width: 100vw; height: 100vw;">
-            <MatDrawer Opened="@_isOpenDrawer">
-                <MatList SingleSelection="true" TwoLine="true">
-                    <MatListItem>
-                        <MatListItemText>
-                            <MatListItemPrimaryText>
-                                <NavLink href="/">Home</NavLink>
-                            </MatListItemPrimaryText>
-                        </MatListItemText>
-                    </MatListItem>
-                </MatList>
-            </MatDrawer>
-        </MatDrawerContainer>
-    </MatAppBarContent>
-
-    Number of climbs added: @ClimbState.Value.NumClimbs
-</MatAppBarContainer>
+Number of climbs added: @ClimbState.Value.NumClimbs
 
 <MatFAB class="app-fab--fixed" OnClick="@OpenAddClimbModal" Icon="@MatIconNames.Add"></MatFAB>
 
@@ -60,7 +31,6 @@
 
 @functions{
     private bool _isOpenAddClimbModal = false;
-    private bool _isOpenDrawer = false;
 
     void OpenAddClimbModal()
     {
@@ -77,10 +47,4 @@
     {
         _isOpenAddClimbModal = false;
     }
-
-    void ToggleDrawer()
-    {
-        _isOpenDrawer = !_isOpenDrawer;
-    }
-
 }
