@@ -5,8 +5,7 @@ namespace Gumby.Contract
     public interface IClimb
     {
         Guid Id { get; }
-        DateTime OccurredAt { get; }
-        TimeZoneInfo OccuredAtTimezone { get; }
+        DateTimeOffset OccurredAt { get; }
         Guid RouteId { get; }
         string RouteName { get; }
     }

@@ -17,13 +17,12 @@ namespace Gumby.Store.Climb
             Climb = new ClimbMinimal()
             {
                 Id = Guid.NewGuid(),
-                OccurredAt = DateTime.UtcNow,
-                OccuredAtTimezone = TimeZoneInfo.Local,
+                OccurredAt = DateTimeOffset.UtcNow,
                 RouteId = Guid.NewGuid(),
-                RouteName = "New Route!!!"
+                RouteName = "New Climb!!!"
                 
             };
-
+            
         }
     }
 }

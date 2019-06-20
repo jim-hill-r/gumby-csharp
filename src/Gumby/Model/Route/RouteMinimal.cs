@@ -10,7 +10,7 @@ namespace Gumby.Model.Route
     {
         public Guid Id { get; set; }
         
-        public DateTime OriginatedAt { get; set; }
+        public DateTime OriginationDate { get; set; }
         
         public Guid RouteId { get; set; }
 

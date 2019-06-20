@@ -17,7 +17,7 @@ namespace Gumby.Store.Route
             Route = new RouteMinimal()
             {
                 Id = Guid.NewGuid(),
-                OriginatedAt = DateTime.UtcNow,
+                OriginationDate = DateTime.Now,
                 RouteId = Guid.NewGuid(),
                 RouteName = "New Route!!!"
                 

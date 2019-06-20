@@ -20,10 +20,10 @@
         <MatListItem>
             <MatListItemText>
                 <MatListItemPrimaryText>
-                    Welcome to Gumby Climb!
+                    There appears to be no routes yet!
                 </MatListItemPrimaryText>
                 <MatBlazor.MatListItemSecondaryText>
-                    Click the blue + button below to add your first route.
+                    Click the blue + button below to add the first route.
                 </MatBlazor.MatListItemSecondaryText>
             </MatListItemText>
         </MatListItem>
@@ -35,10 +35,10 @@
             <MatListItem>
                 <MatListItemText>
                     <MatListItemPrimaryText>
-                        @route.OriginatedAt
+                        @route.RouteName
                     </MatListItemPrimaryText>
                     <MatBlazor.MatListItemSecondaryText>
-                        @route.RouteName
+                        Set on: @route.OriginationDate.ToShortDateString()
                     </MatBlazor.MatListItemSecondaryText>
                 </MatListItemText>
             </MatListItem>

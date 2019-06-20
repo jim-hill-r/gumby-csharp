@@ -10,9 +10,7 @@ namespace Gumby.Model.Climb
     {
         public Guid Id { get; set; }
         
-        public DateTime OccurredAt { get; set; }
-        
-        public TimeZoneInfo OccuredAtTimezone { get; set; }
+        public DateTimeOffset OccurredAt { get; set; }
 
         public Guid RouteId { get; set; }
 

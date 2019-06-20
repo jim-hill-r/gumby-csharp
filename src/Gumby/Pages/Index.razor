@@ -36,7 +36,7 @@
             <MatListItem>
                 <MatListItemText>
                     <MatListItemPrimaryText>
-                        @climb.OccurredAt
+                        @(@climb.OccurredAt.UtcDateTime.ToLocalTime().ToString("g"))
                     </MatListItemPrimaryText>
                     <MatBlazor.MatListItemSecondaryText>
                         @climb.RouteName

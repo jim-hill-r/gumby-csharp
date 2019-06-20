@@ -5,7 +5,7 @@ namespace Gumby.Contract
     public interface IRoute
     {
         Guid Id { get; }
-        DateTime OriginatedAt { get; }
+        DateTime OriginationDate { get; }
         Guid RouteId { get; }
         string RouteName { get; }
     }
