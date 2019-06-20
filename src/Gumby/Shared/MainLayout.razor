@@ -1,6 +1,12 @@
 @inherits LayoutComponentBase
 @inject Blazor.Fluxor.IStore Store
 
+@using Blazor.Fluxor
+@using Store.User
+@using Gumby.Model.User
+@inject IState<UserState> UserState
+@inject IDispatcher Dispatcher
+
 @Store.Initialize()
 
 <MatAppBarContainer>
@@ -12,7 +18,6 @@
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
                 <MatIconButton Icon="@MatIconNames.Search"></MatIconButton>
-                <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
@@ -20,9 +25,11 @@
         <MatDrawerContainer Style="position: fixed; width: 50vw; height: 100vh; z-index: 100;">
             <MatDrawer Opened="@_isOpenDrawer">
                 <MatList>
-                    <MatListItem Href="/">Home</MatListItem>
+                    <MatListItem OnClick="@OpenLoginModal"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
                     <MatListDivider></MatListDivider>
-                    <MatListItem Href="/routes">Routes</MatListItem>
+                    <MatListItem Href="/"> <MatIconButton Icon="@MatIconNames.Home"></MatIconButton> Home </MatListItem>
+                    <MatListDivider></MatListDivider>
+                    <MatListItem Href="/routes"> <MatIconButton Icon="@MatIconNames.Flag"></MatIconButton> Routes </MatListItem>
                 </MatList>
             </MatDrawer>
         </MatDrawerContainer>
@@ -31,11 +38,54 @@
 
 @Body
 
+<MatDialog IsOpen="@_isOpenLoginModal">
+    <MatDialogTitle>Login</MatDialogTitle>
+    <MatDialogContent>
+        <MatTextField @bind-Value="@NewUserName" Label="Username"></MatTextField>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@CancelLoginClicked">Cancel</MatButton>
+        <MatButton OnClick="@OkLoginClicked">OK</MatButton>
+    </MatDialogActions>
+</MatDialog>
+
 @functions{
+
     private bool _isOpenDrawer = false;
+    private bool _isOpenLoginModal = false;
+
+    private string _newUserName;
+    public string NewUserName
+    {
+        get => _newUserName;
+        set
+        {
+            _newUserName = value;
+            this.StateHasChanged();
+        }
+    }            
 
     void ToggleDrawer()
     {
         _isOpenDrawer = !_isOpenDrawer;
+    }
+
+    void OpenLoginModal()
+    {
+        _isOpenDrawer = false;
+        _isOpenLoginModal = true;
+    }
+
+    void OkLoginClicked()
+    {
+        System.Console.WriteLine(NewUserName);
+        Dispatcher.Dispatch(new LoginUserAction(NewUserName));
+        _isOpenLoginModal = false;
+        //NewUserName = null;
+    }
+
+    void CancelLoginClicked()
+    {
+        _isOpenLoginModal = false;
     }
 }
