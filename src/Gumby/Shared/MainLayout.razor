@@ -11,31 +11,27 @@
                 <MatAppBarTitle>Gumby</MatAppBarTitle>
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                <MatIconButton Icon="@MatIconNames.Search"></MatIconButton>
                 <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
     <MatAppBarContent>
-        <MatDrawerContainer Style="position: fixed; width: 50vw; height: 100vh;">
+        <MatDrawerContainer Style="position: fixed; width: 50vw; height: 100vh; z-index: 100;">
             <MatDrawer Opened="@_isOpenDrawer">
-                <MatList SingleSelection="true" TwoLine="true">
-                    <MatListItem>
-                        <MatListItemText>
-                            <MatListItemPrimaryText>
-                                <NavLink href="/">Home</NavLink>
-                            </MatListItemPrimaryText>
-                        </MatListItemText>
-                    </MatListItem>
+                <MatList>
+                    <MatListItem Href="/">Home</MatListItem>
+                    <MatListDivider></MatListDivider>
+                    <MatListItem Href="/routes">Routes</MatListItem>
                 </MatList>
             </MatDrawer>
         </MatDrawerContainer>
     </MatAppBarContent>
-
-    @Body
-
 </MatAppBarContainer>
 
-@functions{ 
+@Body
+
+@functions{
     private bool _isOpenDrawer = false;
 
     void ToggleDrawer()

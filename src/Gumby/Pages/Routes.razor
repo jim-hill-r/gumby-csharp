@@ -1,0 +1,80 @@
+﻿@page "/routes"
+
+@using Blazor.Fluxor
+@using Store.Route
+@using Gumby.Model.Route
+@inject IState<RouteState> RouteState
+@inject IDispatcher Dispatcher
+
+<style>
+    .app-fab--fixed {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+</style>
+
+<MatList SingleSelection="true" TwoLine="true">
+    @if (RouteState.Value.Routes.Count == 0)
+    {
+        <MatListItem>
+            <MatListItemText>
+                <MatListItemPrimaryText>
+                    Welcome to Gumby Climb!
+                </MatListItemPrimaryText>
+                <MatBlazor.MatListItemSecondaryText>
+                    Click the blue + button below to add your first route.
+                </MatBlazor.MatListItemSecondaryText>
+            </MatListItemText>
+        </MatListItem>
+    }
+    else
+    {
+        @foreach (var route in RouteState.Value.Routes)
+        {
+            <MatListItem>
+                <MatListItemText>
+                    <MatListItemPrimaryText>
+                        @route.OriginatedAt
+                    </MatListItemPrimaryText>
+                    <MatBlazor.MatListItemSecondaryText>
+                        @route.RouteName
+                    </MatBlazor.MatListItemSecondaryText>
+                </MatListItemText>
+            </MatListItem>
+        }
+    }
+</MatList>
+
+<MatFAB class="app-fab--fixed" OnClick="@OpenAddRouteModal" Icon="@MatIconNames.Add"></MatFAB>
+
+<MatDialog IsOpen="@_isOpenAddRouteModal">
+    <MatDialogTitle>Add Route</MatDialogTitle>
+    <MatDialogContent>
+        <MatIcon Icon="@MatIconNames.Receipt"></MatIcon>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@CancelAddRouteClicked">Cancel</MatButton>
+        <MatButton OnClick="@OkAddRouteClicked">OK</MatButton>
+    </MatDialogActions>
+</MatDialog>
+
+@functions{
+    private bool _isOpenAddRouteModal = false;
+
+    void OpenAddRouteModal()
+    {
+        _isOpenAddRouteModal = true;
+    }
+
+    void OkAddRouteClicked()
+    {
+        Dispatcher.Dispatch(new AddRouteAction(new RouteMinimal()));
+        _isOpenAddRouteModal = false;
+    }
+
+    void CancelAddRouteClicked()
+    {
+        _isOpenAddRouteModal = false;
+    }
+}
