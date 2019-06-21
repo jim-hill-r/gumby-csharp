@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gumby.Contract\Gumby.Contract.csproj" />
+    <ProjectReference Include="..\Gumby.Services\Gumby.Services.csproj" />
   </ItemGroup>
 
 </Project>

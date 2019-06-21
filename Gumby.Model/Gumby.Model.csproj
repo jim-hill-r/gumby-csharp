@@ -9,4 +9,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\src\Gumby.Contract\Gumby.Contract.csproj" />
+  </ItemGroup>
+
 </Project>

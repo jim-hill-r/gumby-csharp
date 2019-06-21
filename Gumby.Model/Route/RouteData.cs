@@ -1,12 +1,9 @@
-﻿using Gumby.Contract;
+﻿using Gumby.Contract.Route;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gumby.Model.Route
 {
-    public class RouteMinimal : IRoute
+    public class RouteData : IRouteData
     {
         public Guid Id { get; set; }
         

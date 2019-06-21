@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Gumby.Contract
+namespace Gumby.Contract.User
 {
-    public interface IUser
+    public interface IUserData
     {
         Guid Id { get; }
         string Username { get; }

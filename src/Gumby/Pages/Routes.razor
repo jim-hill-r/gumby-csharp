@@ -1,10 +1,11 @@
 ﻿@page "/routes"
 
 @using Blazor.Fluxor
-@using Store.Route
-@using Gumby.Model.Route
+@using Gumby.Store.Route
+@using Gumby.Contract.Route
 @inject IState<RouteState> RouteState
 @inject IDispatcher Dispatcher
+@inject IRouteService RouteService
 
 <style>
     .app-fab--fixed {
@@ -69,7 +70,7 @@
 
     void OkAddRouteClicked()
     {
-        Dispatcher.Dispatch(new AddRouteAction(new RouteMinimal()));
+        Dispatcher.Dispatch(new AddRouteAction(RouteService.GetNewRouteDefault()));
         _isOpenAddRouteModal = false;
     }
 

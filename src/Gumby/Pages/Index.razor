@@ -2,10 +2,14 @@
 @page "/index.html"
 
 @using Blazor.Fluxor
-@using Store.Climb
-@using Gumby.Model.Climb
-@inject IState<ClimbState> ClimbState
+@using Gumby.Store.Journal
+@using Gumby.Contract.Journal
+@using Gumby.Contract.Route
+@using Gumby.Model.Journal
+@inject IState<JournalState> JournalState
 @inject IDispatcher Dispatcher
+@inject IJournalService JournalService
+@inject IProtectionService ProtectionService
 
 <style>
     .app-fab--fixed {
@@ -15,67 +19,98 @@
     }
 </style>
 
-<MatList SingleSelection="true" TwoLine="true">
-    @if (ClimbState.Value.Climbs.Count == 0)
+@if (JournalState.Value.Journals.Count == 0)
+{
+    <MatCard>
+        <h3> Welcome to Gumby Climb!</h3>
+        <p> Click the blue + button below to add your first climb.</p>
+    </MatCard>
+}
+else
+{
+    @foreach (var journal in JournalState.Value.Journals)
     {
-        <MatListItem>
-            <MatListItemText>
-                <MatListItemPrimaryText>
-                    Welcome to Gumby Climb!
-                </MatListItemPrimaryText>
-                <MatBlazor.MatListItemSecondaryText>
-                    Click the blue + button below to add your first climb.
-                </MatBlazor.MatListItemSecondaryText>
-            </MatListItemText>
-        </MatListItem>
+        <MatCard>
+            <h3> @journal.Name <span style="margin-left:10px;">@journal.OccurredAt.UtcDateTime.ToLocalTime().ToString("g")</span></h3>
+            <p> @journal.ProtectionName</p>
+            <p> @journal.RouteName</p>
+        </MatCard>
     }
-    else
-    {
-        @foreach (var climb in ClimbState.Value.Climbs)
-        {
-            <MatListItem>
-                <MatListItemText>
-                    <MatListItemPrimaryText>
-                        @(@climb.OccurredAt.UtcDateTime.ToLocalTime().ToString("g"))
-                    </MatListItemPrimaryText>
-                    <MatBlazor.MatListItemSecondaryText>
-                        @climb.RouteName
-                    </MatBlazor.MatListItemSecondaryText>
-                </MatListItemText>
-            </MatListItem>
-        }
-    }
-</MatList>
 
-<MatFAB class="app-fab--fixed" OnClick="@OpenAddClimbModal" Icon="@MatIconNames.Add"></MatFAB>
+}
 
-<MatDialog IsOpen="@_isOpenAddClimbModal">
-    <MatDialogTitle>Add Climb</MatDialogTitle>
+<MatFAB class="app-fab--fixed" OnClick="@OpenAddJournalModal" Icon="@MatIconNames.Add"></MatFAB>
+
+<MatDialog IsOpen="@_isOpenAddJournalModal">
+    <MatDialogTitle>New Climb</MatDialogTitle>
     <MatDialogContent>
-        <MatIcon Icon="camera"></MatIcon>
+        <MatTextField @bind-Value="@NewJournalName" Label="Name"></MatTextField>
+        <MatSelect @bind-Value="@NewJournalProtection" Label="Protection">
+            @foreach (var protection in ProtectionService.GetProtections())
+            {
+                <MatOption Value="@protection.Id.ToString()">@protection.DisplayName</MatOption>
+            }
+        </MatSelect>
     </MatDialogContent>
     <MatDialogActions>
-        <MatButton OnClick="@CancelAddClimbClicked">Cancel</MatButton>
-        <MatButton OnClick="@OkAddClimbClicked">OK</MatButton>
+        <MatButton OnClick="@CancelAddJournalClicked">Cancel</MatButton>
+        <MatButton OnClick="@OkAddJournalClicked">OK</MatButton>
     </MatDialogActions>
 </MatDialog>
 
 @functions{
-    private bool _isOpenAddClimbModal = false;
 
-    void OpenAddClimbModal()
+    private bool _isOpenAddJournalModal = false;
+
+    private string _newJournalName;
+    public string NewJournalName
     {
-        _isOpenAddClimbModal = true;
+        get => _newJournalName;
+        set
+        {
+            _newJournalName = value;
+            this.StateHasChanged();
+        }
     }
 
-    void OkAddClimbClicked()
+    private string _newJournalProtection;
+    public string NewJournalProtection
     {
-        Dispatcher.Dispatch(new AddClimbAction(new ClimbMinimal()));
-        _isOpenAddClimbModal = false;
+        get => _newJournalProtection;
+        set
+        {
+            _newJournalProtection = value;
+            this.StateHasChanged();
+        }
     }
 
-    void CancelAddClimbClicked()
+    void OpenAddJournalModal()
     {
-        _isOpenAddClimbModal = false;
+        IJournalData defaultJournal = JournalService.GetNewJournalDefault();
+        NewJournalName = defaultJournal.Name;
+        NewJournalProtection = defaultJournal.ProtectionId.ToString();
+        _isOpenAddJournalModal = true;
+    }
+
+    void OkAddJournalClicked()
+    {
+        var newJournalProtectionId = new Guid(NewJournalProtection);
+        var newJournalData = new JournalData()
+        {
+            Id = Guid.NewGuid(),
+            Name = NewJournalName,
+            OccurredAt = DateTimeOffset.UtcNow,
+            RouteId = Guid.NewGuid(),
+            RouteName = "Searching for route...",
+            ProtectionId = newJournalProtectionId,
+            ProtectionName = ProtectionService.GetProtection(newJournalProtectionId).DisplayName
+        };
+        Dispatcher.Dispatch(new AddJournalAction(newJournalData));
+        _isOpenAddJournalModal = false;
+    }
+
+    void CancelAddJournalClicked()
+    {
+        _isOpenAddJournalModal = false;
     }
 }

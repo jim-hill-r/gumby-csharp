@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Blazor.Fluxor;
+﻿using Blazor.Fluxor;
 using Gumby.Model.User;
+using System;
 
 namespace Gumby.Store.User
 {
@@ -11,7 +8,7 @@ namespace Gumby.Store.User
     {
         public override UserState Reduce(UserState state, LoginUserAction action)
         {
-            return new UserState(new UserMinimal() { Id = Guid.NewGuid(), Username = action.Username });
+            return new UserState(new UserData() { Id = Guid.NewGuid(), Username = action.Username });
         }
     }
 }

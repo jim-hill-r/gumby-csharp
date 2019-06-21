@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby", "src\Gumby\Gumby.csproj", "{91D11A2E-B40A-4C0B-8700-24935FD04EE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gumby.Contract", "src\Gumby.Contract\Gumby.Contract.csproj", "{661A6869-F7BD-41D1-89ED-55CE9B47FAE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Contract", "src\Gumby.Contract\Gumby.Contract.csproj", "{661A6869-F7BD-41D1-89ED-55CE9B47FAE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Services", "src\Gumby.Services\Gumby.Services.csproj", "{FBB5989C-D92E-4347-A301-633A84A1399B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gumby.Model", "Gumby.Model\Gumby.Model.csproj", "{5FC76974-3724-49BC-97F3-DC1A965F1E17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{661A6869-F7BD-41D1-89ED-55CE9B47FAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{661A6869-F7BD-41D1-89ED-55CE9B47FAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{661A6869-F7BD-41D1-89ED-55CE9B47FAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB5989C-D92E-4347-A301-633A84A1399B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB5989C-D92E-4347-A301-633A84A1399B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB5989C-D92E-4347-A301-633A84A1399B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB5989C-D92E-4347-A301-633A84A1399B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC76974-3724-49BC-97F3-DC1A965F1E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC76974-3724-49BC-97F3-DC1A965F1E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC76974-3724-49BC-97F3-DC1A965F1E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC76974-3724-49BC-97F3-DC1A965F1E17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

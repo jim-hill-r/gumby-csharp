@@ -2,8 +2,7 @@
 @inject Blazor.Fluxor.IStore Store
 
 @using Blazor.Fluxor
-@using Store.User
-@using Gumby.Model.User
+@using Gumby.Store.User
 @inject IState<UserState> UserState
 @inject IDispatcher Dispatcher
 
@@ -27,9 +26,9 @@
                 <MatList>
                     <MatListItem OnClick="@OpenLoginModal"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
                     <MatListDivider></MatListDivider>
-                    <MatListItem Href="/"> <MatIconButton Icon="@MatIconNames.Home"></MatIconButton> Home </MatListItem>
+                    <MatListItem OnClick="@ToggleDrawer" Href="/"> <MatIconButton Icon="@MatIconNames.Home"></MatIconButton> Home </MatListItem>
                     <MatListDivider></MatListDivider>
-                    <MatListItem Href="/routes"> <MatIconButton Icon="@MatIconNames.Flag"></MatIconButton> Routes </MatListItem>
+                    <MatListItem OnClick="@ToggleDrawer" Href="/routes"> <MatIconButton Icon="@MatIconNames.Flag"></MatIconButton> Routes </MatListItem>
                 </MatList>
             </MatDrawer>
         </MatDrawerContainer>
@@ -78,10 +77,9 @@
 
     void OkLoginClicked()
     {
-        System.Console.WriteLine(NewUserName);
         Dispatcher.Dispatch(new LoginUserAction(NewUserName));
         _isOpenLoginModal = false;
-        //NewUserName = null;
+        NewUserName = null;
     }
 
     void CancelLoginClicked()

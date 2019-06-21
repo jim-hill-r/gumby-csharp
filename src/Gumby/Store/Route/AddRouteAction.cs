@@ -1,27 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Blazor.Fluxor;
-using Gumby.Contract;
-using Gumby.Model.Route;
+﻿using Blazor.Fluxor;
+using Gumby.Contract.Route;
 
 namespace Gumby.Store.Route
 {
     public class AddRouteAction : IAction
     {
-        public IRoute Route { get; }
+        public IRouteData Route { get; }
 
-        public AddRouteAction(IRoute newRoute)
+        public AddRouteAction(IRouteData newRoute)
         {
-            Route = new RouteMinimal()
-            {
-                Id = Guid.NewGuid(),
-                OriginationDate = DateTime.Now,
-                RouteId = Guid.NewGuid(),
-                RouteName = "New Route!!!"
-                
-            };
+            Route = newRoute;
 
         }
     }

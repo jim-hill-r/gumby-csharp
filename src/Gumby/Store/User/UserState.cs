@@ -1,16 +1,12 @@
-﻿using Gumby.Contract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Gumby.Contract.User;
 
 namespace Gumby.Store.User
 {
     public class UserState
     {
-        public IUser User { get; private set; }
+        public IUserData User { get; private set; }
 
-        public UserState(IUser user)
+        public UserState(IUserData user)
         {
             User = user;
         }

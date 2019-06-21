@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,5 +8,10 @@
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gumby.Model\Gumby.Model.csproj" />
+    <ProjectReference Include="..\Gumby.Contract\Gumby.Contract.csproj" />
+  </ItemGroup>
 
 </Project>

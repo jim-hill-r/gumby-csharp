@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Gumby.Contract
+namespace Gumby.Contract.Route
 {
-    public interface IClimb
+    public interface IRouteData
     {
         Guid Id { get; }
-        DateTimeOffset OccurredAt { get; }
+        DateTime OriginationDate { get; }
         Guid RouteId { get; }
         string RouteName { get; }
     }

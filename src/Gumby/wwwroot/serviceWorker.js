@@ -38,6 +38,9 @@ var filesToCache = [
 
     // Project Assemblies
     '/_framework/_bin/Gumby.dll',
+    '/_framework/_bin/Gumby.Model.dll',
+    '/_framework/_bin/Gumby.Contract.dll',
+    '/_framework/_bin/Gumby.Services.dll',
 
     // Routed Pages
     '/routes'

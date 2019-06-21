@@ -1,16 +1,26 @@
 ﻿using Blazor.Fluxor;
-using Gumby.Contract;
+using Gumby.Contract.Journal;
 using Gumby.Model.User;
+using Gumby.Services.User;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gumby.Store.User
 {
     public class UserFeature : Feature<UserState>
     {
-        public override string GetName() => "user";
-        protected override UserState GetInitialState() => new UserState(UserMinimal.Guest);
+        private IUserService _userService;
+        public UserFeature()
+        {
+            _userService = new NativeUserService();
+        }
+        public override string GetName() => "User";
+        protected override UserState GetInitialState() => 
+            new UserState(
+                new UserData()
+                {
+                    Id = Guid.Empty,
+                    Username = "Guest"
+                }
+            );
     }
 }

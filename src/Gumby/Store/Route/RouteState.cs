@@ -1,16 +1,13 @@
-﻿using Gumby.Contract;
-using System;
+﻿using Gumby.Contract.Route;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gumby.Store.Route
 {
     public class RouteState
     {
-        public List<IRoute> Routes { get; private set; }
+        public List<IRouteData> Routes { get; private set; }
 
-        public RouteState(List<IRoute> routes)
+        public RouteState(List<IRouteData> routes)
         {
             Routes = routes;
         }
