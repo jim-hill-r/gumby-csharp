@@ -46,6 +46,7 @@ steps:
     zipAfterPublish: false
 
 - task: DotNetCoreCLI@2
+  displayName: 'Publishing Api...'
   inputs:
     command: 'publish'
     publishWebProjects: false
