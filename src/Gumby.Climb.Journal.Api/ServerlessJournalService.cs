@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Gumby.Climb.Journal.Contract;
 using Gumby.Climb.Route.Contract;
+using System.Data.SqlClient;
+using Gumby.Climb.Database;
 
 namespace Gumby.Climb.Journal.Api
 {
@@ -21,22 +23,28 @@ namespace Gumby.Climb.Journal.Api
             ILogger log,
             Guid id)
         {
-            var journalData = new JournalData()
+            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection");
+            using (var journalRepository = new AzureSQLJournalRepository(str))
             {
-                Id = id
-            };
-
-            return new OkObjectResult(journalData);
+                var journalData = await journalRepository.GetAsync(id);
+                return new OkObjectResult(journalData);
+            }
         }
 
-        private class JournalData : IJournalData
+        [FunctionName("GetJournal")]
+        public static async Task<IActionResult> CreateJournal(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "journal")]
+            HttpRequest req,
+            ILogger log)
         {
-            public Guid Id { get; set; }
-            public string Name { get; set; }
-            public DateTimeOffset OccurredAt { get; set; }
-            public Guid RouteId { get; set; }
-            public string RouteName { get; set; }
-            public ProtectionType ProtectionType { get; set; }
+            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection");
+            using (var journalRepository = new AzureSQLJournalRepository(str))
+            {
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                IJournalData journalBody = JsonConvert.DeserializeObject<IJournalData>(requestBody);
+                journalRepository.CreateAsync(journalBody);
+                return new AcceptedAtRouteResult(journalBody.Id, journalBody);
+            }
         }
     }
 }

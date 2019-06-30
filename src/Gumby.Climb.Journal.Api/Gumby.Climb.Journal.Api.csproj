@@ -5,9 +5,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.28" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gumby.Climb.Journal.Contract\Gumby.Climb.Journal.Contract.csproj" />
+    <ProjectReference Include="..\Gumby.SQL\Gumby.Climb.Database.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
