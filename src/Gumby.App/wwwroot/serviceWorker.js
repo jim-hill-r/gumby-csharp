@@ -35,12 +35,19 @@ var filesToCache = [
     '/_framework/_bin/System.dll',
     '/_framework/_bin/System.Net.Http.dll',
     '/_framework/_bin/MatBlazor.dll',
+    '/_framework/_bin/Blazor.Fluxor.dll',
+    '/_framework/_bin/Toolbelt.Blazor.TimeZoneKit.dll',
+
+    // Content Dependencies
+    '/_content/MatBlazor/dist/matBlazor.js',
 
     // Project Assemblies
-    '/_framework/_bin/Gumby.dll',
-    '/_framework/_bin/Gumby.Model.dll',
-    '/_framework/_bin/Gumby.Contract.dll',
-    '/_framework/_bin/Gumby.Services.dll',
+    '/_framework/_bin/Gumby.App.dll',
+    '/_framework/_bin/Gumby.Climb.Journal.Contract.dll',
+    '/_framework/_bin/Gumby.Climb.Journal.Domain.dll',
+    '/_framework/_bin/Gumby.Climb.Route.Contract.dll',
+    '/_framework/_bin/Gumby.User.Contract.dll',
+    '/_framework/_bin/Gumby.User.Domain.dll',
 
     // Routed Pages
     '/routes'
