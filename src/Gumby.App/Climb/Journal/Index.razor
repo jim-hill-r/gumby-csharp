@@ -1,0 +1,110 @@
+﻿@layout MainLayout
+@page "/"
+@page "/index.html"
+
+@using Blazor.Fluxor
+@using Gumby.App.Climb.Journal.Store
+@using Gumby.Climb.Journal.Contract
+@using Gumby.Climb.Journal.Domain
+@using Gumby.Climb.Route.Contract
+@inject IState<JournalState> JournalState
+@inject IDispatcher Dispatcher
+
+<style>
+    .app-fab--fixed {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+</style>
+
+@if (JournalState.Value.Journals.Count == 0)
+{
+    <MatCard>
+        <h3> Welcome to Gumby Climb!</h3>
+        <p> Click the blue + button below to add your first climb.</p>
+    </MatCard>
+}
+else
+{
+    @foreach (var journal in JournalState.Value.Journals)
+    {
+        <MatCard>
+            <h3> @journal.Name <span style="margin-left:10px;">@journal.OccurredAt.UtcDateTime.ToLocalTime().ToString("g")</span></h3>
+            <p> @journal.ProtectionType</p>
+            <p> @journal.RouteName</p>
+        </MatCard>
+    }
+
+}
+
+<MatFAB class="app-fab--fixed" OnClick="@OpenAddJournalModal" Icon="@MatIconNames.Add"></MatFAB>
+
+<MatDialog IsOpen="@_isOpenAddJournalModal">
+    <MatDialogTitle>New Climb</MatDialogTitle>
+    <MatDialogContent>
+        <MatTextField @bind-Value="@NewJournalName" Label="Name"></MatTextField>
+        <MatSelect @bind-Value="@NewJournalProtection" Label="Protection">
+            @foreach (var protection in Enum.GetNames(typeof(ProtectionType)))
+            {
+                <MatOption Value="@protection">@protection</MatOption>
+            }
+        </MatSelect>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@CancelAddJournalClicked">Cancel</MatButton>
+        <MatButton OnClick="@OkAddJournalClicked">OK</MatButton>
+    </MatDialogActions>
+</MatDialog>
+
+@functions{
+
+    private bool _isOpenAddJournalModal = false;
+
+    private string _newJournalName;
+    public string NewJournalName
+    {
+        get => _newJournalName;
+        set
+        {
+            _newJournalName = value;
+            this.StateHasChanged();
+        }
+    }
+
+    private string _newJournalProtection;
+    public string NewJournalProtection
+    {
+        get => _newJournalProtection;
+        set
+        {
+            _newJournalProtection = value;
+            this.StateHasChanged();
+        }
+    }
+
+    void OpenAddJournalModal()
+    {
+        NewJournalName = JournalHelper.GetNewName(DateTime.Now);
+        NewJournalProtection = ProtectionType.NONE.ToString();
+        _isOpenAddJournalModal = true;
+    }
+
+    void OkAddJournalClicked()
+    {
+        var addJournalAction = new AddJournalAction();
+        addJournalAction.Name = NewJournalName;
+        ProtectionType protectionType = ProtectionType.NONE;
+        if (Enum.TryParse<ProtectionType>(NewJournalProtection, out protectionType))
+        {
+            addJournalAction.ProtectionType = protectionType;
+        }
+        Dispatcher.Dispatch(addJournalAction);
+        _isOpenAddJournalModal = false;
+    }
+
+    void CancelAddJournalClicked()
+    {
+        _isOpenAddJournalModal = false;
+    }
+}
