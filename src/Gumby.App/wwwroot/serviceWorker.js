@@ -47,10 +47,10 @@ var filesToCache = [
     '/_framework/_bin/Gumby.Climb.Journal.Domain.dll',
     '/_framework/_bin/Gumby.Climb.Route.Contract.dll',
     '/_framework/_bin/Gumby.User.Contract.dll',
-    '/_framework/_bin/Gumby.User.Domain.dll',
+    '/_framework/_bin/Gumby.User.Domain.dll'
 
     // Routed Pages
-    '/routes'
+    //'/routes'
 ];
 
 self.addEventListener('install', function (e) {
