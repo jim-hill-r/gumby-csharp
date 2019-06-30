@@ -16,6 +16,20 @@ namespace Gumby.Climb.Journal.Api
 {
     public static class ServerlessJournalService
     {
+        [FunctionName("GetManyJournal")]
+        public static async Task<IActionResult> GetManyJournal(
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "journal")]
+            HttpRequest req,
+            ILogger log)
+        {
+            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection");
+            using (var journalRepository = new AzureSQLJournalRepository(str))
+            {
+                var journalData = await journalRepository.GetManyAsync(10);
+                return new OkObjectResult(journalData);
+            }
+        }
+
         [FunctionName("GetJournal")]
         public static async Task<IActionResult> GetJournal(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "journal/{id}")]

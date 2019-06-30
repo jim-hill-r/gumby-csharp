@@ -18,6 +18,13 @@ namespace Gumby.Climb.Database
             _sqlConnection.Open();
         }
 
+        public async Task<IEnumerable<IJournalData>> GetManyAsync(int count)
+        {
+            var text = "SELECT TOP @count * FROM Climb.Journal";
+
+            return new List<IJournalData>();
+        }
+
         public async Task<IJournalData> GetAsync(Guid id)
         {
             var text = "SELECT * FROM Climb.Journal WHERE Id=@id";
@@ -30,7 +37,17 @@ namespace Gumby.Climb.Database
 
         public async Task<Guid> CreateAsync(IJournalData journal)
         {
-            return Guid.NewGuid();
+            var text = 
+                @"INSERT INTO Climb.Journal(Id, Name)
+V               VALUES(@Id, @Name);";
+
+            using (SqlCommand cmd = new SqlCommand(text, _sqlConnection))
+            {
+                cmd.Parameters.AddWithValue("@Id", journal.Id.ToString());
+                cmd.Parameters.AddWithValue("@Name", journal.Name);
+                await cmd.ExecuteNonQueryAsync();
+            }
+            return journal.Id;
         }
 
         public void Dispose()
