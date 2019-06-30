@@ -22,7 +22,7 @@
 {
     <MatCard>
         <h3> Welcome to Gumby Climb!</h3>
-        <p> Click the blue + button below to add your first climb.</p>
+        <p> Click the blue + button below to add your first climb journal entry.</p>
     </MatCard>
 }
 else
@@ -31,8 +31,17 @@ else
     {
         <MatCard>
             <h3> @journal.Name <span style="margin-left:10px;">@journal.OccurredAt.UtcDateTime.ToLocalTime().ToString("g")</span></h3>
-            <p> @journal.ProtectionType</p>
-            <p> @journal.RouteName</p>
+            <div> Style: @journal.ProtectionType.GetDisplayName()</div>
+            <div> Route: 
+                @if (journal.RouteName != null)
+                {
+                    @journal.RouteName
+                }
+                else
+                {
+                    <i> Searching for route based on journal analysis....</i>
+                }
+            </div>
         </MatCard>
     }
 
@@ -41,13 +50,13 @@ else
 <MatFAB class="app-fab--fixed" OnClick="@OpenAddJournalModal" Icon="@MatIconNames.Add"></MatFAB>
 
 <MatDialog IsOpen="@_isOpenAddJournalModal">
-    <MatDialogTitle>New Climb</MatDialogTitle>
+    <MatDialogTitle>New Climb Entry</MatDialogTitle>
     <MatDialogContent>
         <MatTextField @bind-Value="@NewJournalName" Label="Name"></MatTextField>
-        <MatSelect @bind-Value="@NewJournalProtection" Label="Protection">
-            @foreach (var protection in Enum.GetNames(typeof(ProtectionType)))
+        <MatSelect @bind-Value="@NewJournalProtection" Label="Style">
+            @foreach (var protection in _protectionTypes)
             {
-                <MatOption Value="@protection">@protection</MatOption>
+                <MatOption Value="@protection.ToString()">@protection.GetDisplayName()</MatOption>
             }
         </MatSelect>
     </MatDialogContent>
@@ -59,6 +68,7 @@ else
 
 @functions{
 
+    private IList<ProtectionType> _protectionTypes = ProtectionTypeHelper.GetAll();
     private bool _isOpenAddJournalModal = false;
 
     private string _newJournalName;
@@ -86,7 +96,14 @@ else
     void OpenAddJournalModal()
     {
         NewJournalName = JournalHelper.GetNewName(DateTime.Now);
-        NewJournalProtection = ProtectionType.NONE.ToString();
+        if(JournalState.Value.Journals.Count > 0)
+        {
+            NewJournalProtection = JournalState.Value.Journals[0].ProtectionType.ToString();
+        }
+        else
+        {
+            NewJournalProtection = ProtectionType.BOULDER.ToString();
+        }
         _isOpenAddJournalModal = true;
     }
 
@@ -94,11 +111,13 @@ else
     {
         var addJournalAction = new AddJournalAction();
         addJournalAction.Name = NewJournalName;
-        ProtectionType protectionType = ProtectionType.NONE;
-        if (Enum.TryParse<ProtectionType>(NewJournalProtection, out protectionType))
+
+        ProtectionType protectionType;
+        if (Enum.TryParse(NewJournalProtection, out protectionType))
         {
             addJournalAction.ProtectionType = protectionType;
         }
+
         Dispatcher.Dispatch(addJournalAction);
         _isOpenAddJournalModal = false;
     }
