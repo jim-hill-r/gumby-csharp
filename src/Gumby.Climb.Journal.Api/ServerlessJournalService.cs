@@ -7,6 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Gumby.Climb.Journal.Contract;
+using Gumby.Climb.Route.Contract;
 
 namespace Gumby.Climb.Journal.Api
 {
@@ -14,20 +16,27 @@ namespace Gumby.Climb.Journal.Api
     {
         [FunctionName("GetJournal")]
         public static async Task<IActionResult> GetJournal(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "journal/{id}")]
+            HttpRequest req, 
+            ILogger log,
+            Guid id)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            var journalData = new JournalData()
+            {
+                Id = id
+            };
 
-            string name = req.Query["name"];
+            return new OkObjectResult(journalData);
+        }
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
-
-            return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+        private class JournalData : IJournalData
+        {
+            public Guid Id { get; set; }
+            public string Name { get; set; }
+            public DateTimeOffset OccurredAt { get; set; }
+            public Guid RouteId { get; set; }
+            public string RouteName { get; set; }
+            public ProtectionType ProtectionType { get; set; }
         }
     }
 }
