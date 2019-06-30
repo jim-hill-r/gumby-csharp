@@ -8,8 +8,8 @@ namespace Gumby.Climb.Database
 {
     public interface IJournalRepository
     {
-        Task<IEnumerable<IJournalData>> GetManyAsync(int count);
-        Task<IJournalData> GetAsync(Guid id);
-        Task<Guid> CreateAsync(IJournalData journal);
+        Task<IEnumerable<JournalData>> GetManyAsync(int count);
+        Task<JournalData> GetAsync(Guid id);
+        Task<Guid> CreateAsync(JournalData journal);
     }
 }

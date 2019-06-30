@@ -15,7 +15,7 @@ namespace Gumby.App.Climb.Route.Store
                 OriginationDate = DateTime.UtcNow,
                 RouteName = "Route " + routeCount
             });
-
+            
             return state;
         }
 

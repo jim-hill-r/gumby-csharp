@@ -30,12 +30,12 @@ else
     @foreach (var journal in JournalState.Value.Journals)
     {
         <MatCard>
-            <h3> @journal.Name <span style="margin-left:10px;">@journal.OccurredAt.UtcDateTime.ToLocalTime().ToString("g")</span></h3>
-            <div> Style: @journal.ProtectionType.GetDisplayName()</div>
+            <h3> @journal.Name <span style="margin-left:10px;">@journal.OccurredAt.Value.UtcDateTime.ToLocalTime().ToString("g")</span></h3>
+            <div> Style: @journal.ProtectionType.Value.GetDisplayName()</div>
             <div> Route: 
-                @if (journal.RouteName != null)
+                @if (JournalState.Value.RouteNames.ContainsKey(journal.Id))
                 {
-                    @journal.RouteName
+                    @JournalState.Value.RouteNames[journal.Id]
                 }
                 else
                 {
@@ -91,6 +91,11 @@ else
             _newJournalProtection = value;
             this.StateHasChanged();
         }
+    }
+
+    protected override void OnInit()
+    {
+        Dispatcher.Dispatch(new RefreshJournalAction());
     }
 
     void OpenAddJournalModal()
