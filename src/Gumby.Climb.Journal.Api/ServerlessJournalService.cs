@@ -16,7 +16,7 @@ namespace Gumby.Climb.Journal.Api
     {
         [FunctionName("GetManyJournal")]
         public static async Task<IActionResult> GetManyJournal(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "journal")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "journal")]
             HttpRequest req,
             ILogger log)
         {
@@ -28,7 +28,7 @@ namespace Gumby.Climb.Journal.Api
 
         [FunctionName("GetJournal")]
         public static async Task<IActionResult> GetJournal(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "journal/{id}")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "journal/{id}")]
             HttpRequest req, 
             ILogger log,
             string id)
@@ -42,7 +42,7 @@ namespace Gumby.Climb.Journal.Api
 
         [FunctionName("CreateJournal")]
         public static async Task<IActionResult> CreateJournal(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "journal")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "journal")]
             HttpRequest req,
             ILogger log)
         {
