@@ -4,7 +4,7 @@ using System;
 
 namespace Gumby.App.Climb.Journal.Store
 {
-    public class RefreshJournalAction : IAction
+    public class FetchJournalAction : IAction
     {
     }
 }

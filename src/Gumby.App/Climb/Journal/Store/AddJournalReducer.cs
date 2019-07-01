@@ -18,8 +18,6 @@ namespace Gumby.App.Climb.Journal.Store
             };
             state.Journals.Insert(0, newJournalData);
 
-            JournalService.CreateJournal(newJournalData);
-
             return state;
         }
     }

@@ -54,14 +54,5 @@ namespace Gumby.Climb.Journal.Api
             journalRepository.CreateAsync(journalBody);
             return new AcceptedResult();
         }
-
-        [FunctionName("Options")]
-        public static async Task<IActionResult> Options(
-            [HttpTrigger(AuthorizationLevel.Function, "options", Route = "*")]
-            HttpRequest req,
-            ILogger log)
-        {
-            return new OkResult();
-        }
     }
 }
