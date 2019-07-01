@@ -6,12 +6,12 @@ using Gumby.Climb.Route.Contract;
 
 namespace Gumby.App.Climb.Journal.Store
 {
-    public class RefreshJournalReducer : Reducer<JournalState, AddJournalAction>
+    public class RefreshJournalReducer : Reducer<JournalState, RefreshJournalAction>
     {
-        public override JournalState Reduce(JournalState state, AddJournalAction action)
+        public override JournalState Reduce(JournalState state, RefreshJournalAction action)
         {
+            return state;
             var journalTask = JournalService.GetManyJournal();
-            journalTask.Wait();
             return new JournalState(journalTask.Result.ToList(), state.RouteNames);
         }
     }

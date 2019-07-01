@@ -42,7 +42,7 @@ namespace Gumby.Climb.Journal.Api
 
         [FunctionName("CreateJournal")]
         public static async Task<IActionResult> CreateJournal(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "journal")]
+            [HttpTrigger(AuthorizationLevel.Function, "post", "options", Route = "journal")]
             HttpRequest req,
             ILogger log)
         {
