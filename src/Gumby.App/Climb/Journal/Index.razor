@@ -109,7 +109,6 @@ else
     protected override void OnInit()
     {
         JournalState.Subscribe(this);
-        Dispatcher.Dispatch(new FetchJournalAction());
     }
 
     void OpenAddJournalModal()
