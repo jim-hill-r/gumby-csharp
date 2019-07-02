@@ -11,8 +11,8 @@ namespace Gumby.App.Climb.Journal.Store
 {
     public class FetchJournalEffect : Effect<FetchJournalAction>
     {
-        public readonly string API_PATH = "https://gumbysl.azurewebsites.net/api";
-        public readonly string API_KEY = "QWWkaPYiPdD6jeBqATZboUBtWuU5b1j7OPW95WayuQtca6UJc2Z61g==";
+        public readonly string API_ROOT = "https://gumbysl.azurewebsites.net/api";
+        public readonly string API_ENDPOINT = "journal";
 
         private readonly HttpClient HttpClient;
 
@@ -26,7 +26,7 @@ namespace Gumby.App.Climb.Journal.Store
             var journals = new List<JournalData>();
             try
             {
-                var journalArray = await HttpClient.GetJsonAsync<JournalData[]>($"{API_PATH}/journal?code={API_KEY}");
+                var journalArray = await HttpClient.GetJsonAsync<JournalData[]>($"{API_ROOT}/{API_ENDPOINT}");
                 journals = journalArray.ToList();
             }
             catch

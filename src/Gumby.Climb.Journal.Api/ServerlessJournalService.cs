@@ -14,6 +14,15 @@ namespace Gumby.Climb.Journal.Api
 {
     public static class ServerlessJournalService
     {
+        [FunctionName("Options")]
+        public static async Task<IActionResult> GetOptions(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "options", Route = "{*path}")]
+            HttpRequest req,
+            ILogger log)
+        {
+           return new OkResult();
+        }
+
         [FunctionName("GetManyJournal")]
         public static async Task<IActionResult> GetManyJournal(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "journal")]
