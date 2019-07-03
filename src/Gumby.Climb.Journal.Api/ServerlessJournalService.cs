@@ -1,5 +1,6 @@
 using Gumby.Climb.Database;
 using Gumby.Climb.Journal.Contract;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -9,20 +10,13 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Net.Http;
 
 namespace Gumby.Climb.Journal.Api
 {
     public static class ServerlessJournalService
     {
-        [FunctionName("Options")]
-        public static async Task<IActionResult> GetOptions(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "options", Route = "{*path}")]
-            HttpRequest req,
-            ILogger log)
-        {
-           return new OkResult();
-        }
-
         [FunctionName("GetManyJournal")]
         public static async Task<IActionResult> GetManyJournal(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "journal")]
@@ -62,6 +56,26 @@ namespace Gumby.Climb.Journal.Api
             JournalData journalBody = JsonConvert.DeserializeObject<JournalData>(await requestBodyTask);
             journalRepository.CreateAsync(journalBody);
             return new AcceptedResult();
+        }
+
+        [FunctionName("CheckOptions")]
+        public static async Task<HttpResponseMessage> CheckOptions(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "options", Route = "{*path}")]
+            HttpRequest req,
+            ILogger log)
+        {
+            var res = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden);
+
+            if(req.Headers.ContainsKey("Origin") && req.Headers.ContainsKey("Access-Control-Request-Headers"))
+            {
+                res.Headers.Add("Connection", "keep-alive");
+                res.Headers.Add("Access-Control-Allow-Origin", req.Headers["Origin"].First());
+                res.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+                res.Headers.Add("Access-Control-Max-Age", "86400");
+                res.StatusCode = System.Net.HttpStatusCode.NoContent;
+            }            
+
+            return res;
         }
     }
 }
