@@ -71,6 +71,7 @@ namespace Gumby.Climb.Journal.Api
                 res.Headers.Add("Connection", "keep-alive");
                 res.Headers.Add("Access-Control-Allow-Origin", req.Headers["Origin"].First());
                 res.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+                res.Headers.Add("Access-Control-Allow-Headers", "content-type");
                 res.Headers.Add("Access-Control-Max-Age", "86400");
                 res.StatusCode = System.Net.HttpStatusCode.NoContent;
             }            
