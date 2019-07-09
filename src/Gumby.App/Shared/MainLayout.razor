@@ -24,7 +24,7 @@
         <MatDrawerContainer Style="position: fixed; width: 50vw; height: 100vh; z-index: 100;">
             <MatDrawer Opened="@_isOpenDrawer">
                 <MatList>
-                    <MatListItem OnClick="@OpenLoginModal"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
+                    <MatListItem Href="@LOGIN_URL"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
                     <MatListDivider></MatListDivider>
                     <MatListItem OnClick="@ToggleDrawer" Href="/"> <MatIconButton Icon="@MatIconNames.Pages"></MatIconButton> Journal </MatListItem>
                     <MatListDivider></MatListDivider>
@@ -50,6 +50,7 @@
 
 @functions{
 
+    private readonly string LOGIN_URL = "https://6umby.b2clogin.com/6umby.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_GumbySignUpSignIn&client_id=62c98281-193a-4884-a3a3-131eac593dff&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fclimb.6umby.com%2Findex.html&scope=openid&response_type=id_token&prompt=login";
     private bool _isOpenDrawer = false;
     private bool _isOpenLoginModal = false;
 
