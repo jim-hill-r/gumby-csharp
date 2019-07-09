@@ -59,7 +59,7 @@ namespace Gumby.Climb.Journal.Api
         }
 
         [FunctionName("CheckOptions")]
-        public static async Task<HttpResponseMessage> CheckOptions(
+        /*public static async Task<HttpResponseMessage> CheckOptions(
             [HttpTrigger(AuthorizationLevel.Anonymous, "options", Route = "{*path}")]
             HttpRequest req,
             ILogger log)
@@ -77,6 +77,6 @@ namespace Gumby.Climb.Journal.Api
             }            
 
             return res;
-        }
+        }*/
     }
 }
