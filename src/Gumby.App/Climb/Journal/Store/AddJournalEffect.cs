@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization;
 
 namespace Gumby.App.Climb.Journal.Store
 {
@@ -34,11 +33,7 @@ namespace Gumby.App.Climb.Journal.Store
                     OccurredAt = action.OccurredAt ?? DateTime.UtcNow,
                     ProtectionType = action.ProtectionType ?? ProtectionType.NONE
                 };
-
-                var stringPayload = await Task.Run(() => JsonSerializer.ToString(newJournalData));
-
-                HttpContent httpContent = new StringContent(stringPayload);
-                await HttpClient.PostAsync($"{API_ROOT}/{API_ENDPOINT}", httpContent);
+                await HttpClient.PostJsonAsync<List<JournalData>>($"{API_ROOT}/{API_ENDPOINT}", newJournalData);
             }
             catch
             {
