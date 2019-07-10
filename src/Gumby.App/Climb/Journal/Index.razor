@@ -9,6 +9,7 @@
 @using Gumby.Climb.Route.Contract
 @inject IState<JournalState> JournalState
 @inject IDispatcher Dispatcher
+@inject IUriHelper UriHelper
 
 <style>
     .app-fab--fixed {
@@ -109,6 +110,13 @@ else
     protected override void OnInit()
     {
         JournalState.Subscribe(this);
+        var url = UriHelper.GetAbsoluteUri();
+        var token = url.Split("id_token=");
+        if(token.Length > 1)
+        {
+            //TODO: Throw logged in action
+            UriHelper.NavigateTo("/index.html");
+        }
     }
 
     void OpenAddJournalModal()
