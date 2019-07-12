@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>Gumby</title>
     <base href="/" />
-    <link href="css/site.css" rel="stylesheet" />
-    <link rel="manifest" href="manifest.json" />
-    <link rel="script" href="serviceWorker.js" />
+    <link rel="stylesheet" href="/css/site.css"  />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="script" href="/serviceWorker.js" />
     <meta name="theme-color" content="#8bc34a" />
     <style>
         #spinner {
@@ -32,10 +32,10 @@
 </head>
 <body>
     <app>
-        <img id="spinner" src="icons/gumby-192x192.png" />
+        <img id="spinner" src="/icons/gumby-192x192.png" />
     </app>
 
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="/_framework/blazor.webassembly.js"></script>
     
     <script>
         if ('serviceWorker' in navigator) {
