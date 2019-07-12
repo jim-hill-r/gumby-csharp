@@ -5,6 +5,7 @@
 @using Gumby.App.User.Store
 @inject IState<UserState> UserState
 @inject IDispatcher Dispatcher
+@inject IUriHelper UriHelper
 
 @Store.Initialize()
 
@@ -24,7 +25,7 @@
         <MatDrawerContainer Style="position: fixed; width: 50vw; height: 100vh; z-index: 100;">
             <MatDrawer Opened="@_isOpenDrawer">
                 <MatList>
-                    <MatListItem Href="@LOGIN_URL"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
+                    <MatListItem Href="@LoginUrl"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
                     <MatListDivider></MatListDivider>
                     <MatListItem OnClick="@ToggleDrawer" Href="/"> <MatIconButton Icon="@MatIconNames.Pages"></MatIconButton> Journal </MatListItem>
                     <MatListDivider></MatListDivider>
@@ -50,10 +51,36 @@
 
 @functions{
 
-    private readonly string LOGIN_URL = "https://6umby.b2clogin.com/6umby.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_GumbySignUpSignIn&client_id=62c98281-193a-4884-a3a3-131eac593dff&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fclimb.6umby.com%2Findex.html&scope=openid&response_type=id_token&prompt=login";
+        //private readonly string LOGIN_URL = "https://6umby.b2clogin.com/6umby.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_GumbySignUpSignIn&client_id=62c98281-193a-4884-a3a3-131eac593dff&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fclimb.6umby.com%2Findex.html&scope=openid&response_type=id_token&prompt=login";
     private bool _isOpenDrawer = false;
     private bool _isOpenLoginModal = false;
 
+    private string LoginUrl
+    {
+        get
+        {
+            var currentUri = UriHelper.GetAbsoluteUri();
+            var host = new Uri(currentUri).Host;
+            var clientId = new Guid("62c98281-193a-4884-a3a3-131eac593dff");
+            if (host.Contains("jimhillr.dev"))
+            {
+                clientId = new Guid("1f14efd2-38c7-4dbd-a834-6b07233e1fb2");
+            }
+            var uriBuilder = new UriBuilder();
+            uriBuilder.Scheme = "https";
+            uriBuilder.Host = "6umby.b2clogin.com";
+            uriBuilder.Path = "6umby.onmicrosoft.com/oauth2/v2.0/authorize";
+            uriBuilder.Query =
+                "p=B2C_1_GumbySignUpSignIn" +
+                "&client_id=" + clientId.ToString() +
+                "&nonce=defaultNonce" +
+                "&redirect_uri=" + currentUri +
+                "&scope=openid" +
+                "&response_type=id_token" +
+                "&prompt=login";
+            return uriBuilder.ToString();
+        }
+    }
     private string _newUserName;
     public string NewUserName
     {
@@ -63,7 +90,7 @@
             _newUserName = value;
             this.StateHasChanged();
         }
-    }            
+    }
 
     void ToggleDrawer()
     {

@@ -73,6 +73,7 @@ else
                 <MatOption Value="@protection.ToString()">@protection.GetDisplayName()</MatOption>
             }
         </MatSelect>
+        <input type="file" accept="image/x-png,image/jpg,image/gif"/>
     </MatDialogContent>
     <MatDialogActions>
         <MatButton OnClick="@CancelAddJournalClicked">Cancel</MatButton>
@@ -110,9 +111,8 @@ else
     protected override void OnInit()
     {
         JournalState.Subscribe(this);
-        var url = UriHelper.GetAbsoluteUri();
-        var token = url.Split("id_token=");
-        if(token.Length > 1)
+        var token = new Uri(UriHelper.GetAbsoluteUri()).Fragment.Replace("#id_token=","");
+        if(token.Length > 0)
         {
             //TODO: Throw logged in action
             UriHelper.NavigateTo("/index.html");
