@@ -22,8 +22,8 @@
         </MatAppBarRow>
     </MatAppBar>
     <MatAppBarContent>
-        <MatDrawerContainer Style="position: fixed; width: 50vw; height: 100vh; z-index: 100;">
-            <MatDrawer Opened="@_isOpenDrawer">
+        <MatDrawerContainer Style="width: 100vw; height: 100vh;">
+            <MatDrawer @bind-Opened="@_isOpenDrawer" Mode="@MatDrawerMode.Modal">
                 <MatList>
                     <MatListItem Href="@LoginUrl"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
                     <MatListDivider></MatListDivider>
@@ -32,11 +32,12 @@
                     <MatListItem OnClick="@ToggleDrawer" Href="/routes"> <MatIconButton Icon="@MatIconNames.Flag"></MatIconButton> Routes </MatListItem>
                 </MatList>
             </MatDrawer>
+            <MatDrawerContent>
+                @Body
+            </MatDrawerContent>
         </MatDrawerContainer>
     </MatAppBarContent>
 </MatAppBarContainer>
-
-@Body
 
 <MatDialog IsOpen="@_isOpenLoginModal">
     <MatDialogTitle>Login</MatDialogTitle>
