@@ -64,16 +64,25 @@ else
 <MatFAB class="app-fab--fixed" OnClick="@OpenAddJournalModal" Icon="@MatIconNames.Add"></MatFAB>
 
 <MatDialog IsOpen="@_isOpenAddJournalModal">
-    <MatDialogTitle>New Climb Entry</MatDialogTitle>
+    <MatDialogTitle>New Journal Entry</MatDialogTitle>
     <MatDialogContent>
-        <MatTextField @bind-Value="@NewJournalName" Label="Name"></MatTextField>
-        <MatSelect @bind-Value="@NewJournalProtection" Label="Style">
-            @foreach (var protection in _protectionTypes)
-            {
-                <MatOption Value="@protection.ToString()">@protection.GetDisplayName()</MatOption>
-            }
-        </MatSelect>
-        <input type="file" accept="image/x-png,image/jpg,image/gif"/>
+        <div style="margin:15px">
+            <label style="width:100%; text-align:center;">
+                <input id="imageUpload" ref="_imageUpload" style="display: none;" type="file" accept="image/x-png,image/jpg,image/gif" />
+                <MatIcon Icon="@MatIconNames.Image_search"></MatIcon>
+            </label>
+        </div>
+        <div style="margin:15px">
+            <MatTextField @bind-Value="@NewJournalName" Label="Name" Outlined="true" Style="width:100%"></MatTextField>
+        </div>
+        <div style="margin:15px">
+            <MatSelect @bind-Value="@NewJournalProtection" Label="Style" Outlined="true" Style="width:100%">
+                @foreach (var protection in _protectionTypes)
+                {
+                    <MatOption Value="@protection.ToString()">@protection.GetDisplayName()</MatOption>
+                }
+            </MatSelect>
+        </div>
     </MatDialogContent>
     <MatDialogActions>
         <MatButton OnClick="@CancelAddJournalClicked">Cancel</MatButton>
@@ -82,6 +91,8 @@ else
 </MatDialog>
 
 @functions{
+
+    private ElementRef _imageUpload;
 
     private IList<ProtectionType> _protectionTypes = ProtectionTypeHelper.GetAll();
     private bool _isOpenAddJournalModal = false;
