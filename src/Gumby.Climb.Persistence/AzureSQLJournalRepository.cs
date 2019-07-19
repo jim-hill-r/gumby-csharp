@@ -10,12 +10,11 @@ namespace Gumby.Climb.Database
 {
     public class AzureSQLJournalRepository : IJournalRepository, IDisposable
     {
-        private readonly string CONN = "Server=tcp:gumbysql.database.windows.net,1433;Initial Catalog=gumbySQL;Persist Security Info=False;User ID=alexhonnold;Password=c53AE9c6E1AE95cD51B144F2A9E4A451;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private JournalContext _context;
         public AzureSQLJournalRepository(string dbConnectionString)
         {
             var optionsBuilder = new DbContextOptionsBuilder<JournalContext>();
-            optionsBuilder.UseSqlServer(CONN);
+            optionsBuilder.UseSqlServer(dbConnectionString);
             _context = new JournalContext(optionsBuilder.Options);
         }
         
