@@ -12,7 +12,16 @@
 <MatDrawerContainer Style="width: 100vw; height: 100vh;">
     <MatDrawer @bind-Opened="@_isOpenDrawer" Mode="@MatDrawerMode.Modal">
         <MatList>
-            <MatListItem Href="@LoginUrl"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton> @UserState.Value.User.Username </MatListItem>
+            <MatListItem OnClick="@NavigateProfile"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
+                @if (UserState.Value.IsAuthenticated)
+                {
+                    <span> @UserState.Value.User.Username  </span>;
+                }
+                else
+                {
+                    <span> Login </span>
+                }
+            </MatListItem>
             <MatListDivider></MatListDivider>
             <MatListItem OnClick="@ToggleDrawer" Href="/"> <MatIconButton Icon="@MatIconNames.Pages"></MatIconButton> Journal </MatListItem>
             <MatListDivider></MatListDivider>
@@ -42,44 +51,31 @@
 @functions{
     private bool _isOpenDrawer = false;
 
-    private string LoginUrl
+    protected override void OnInit()
     {
-        get
+        UserState.Subscribe(this);
+        var currentUri = new Uri(UriHelper.GetAbsoluteUri());
+        var token = currentUri.Fragment.Replace("#id_token=","");
+        if(token.Length > 0)
         {
-            var currentUri = UriHelper.GetAbsoluteUri();
-            var host = new Uri(currentUri).Host;
-            var clientId = new Guid("62c98281-193a-4884-a3a3-131eac593dff");
-            if (host.Contains("jimhillr.dev"))
-            {
-                clientId = new Guid("1f14efd2-38c7-4dbd-a834-6b07233e1fb2");
-            }
-            var uriBuilder = new UriBuilder();
-            uriBuilder.Scheme = "https";
-            uriBuilder.Host = "6umby.b2clogin.com";
-            uriBuilder.Path = "6umby.onmicrosoft.com/oauth2/v2.0/authorize";
-            uriBuilder.Query =
-                "p=B2C_1_GumbySignUpSignIn" +
-                "&client_id=" + clientId.ToString() +
-                "&nonce=defaultNonce" +
-                "&redirect_uri=" + currentUri +
-                "&scope=openid" +
-                "&response_type=id_token" +
-                "&prompt=login";
-            return uriBuilder.ToString();
-        }
-    }
-    private string _newUserName;
-    public string NewUserName
-    {
-        get => _newUserName;
-        set
-        {
-            _newUserName = value;
-            this.StateHasChanged();
+            Dispatcher.Dispatch(new TokenReceivedAction(token));
+            UriHelper.NavigateTo(currentUri.ToString().Replace(currentUri.Fragment,""));
         }
     }
 
-    void ToggleDrawer()
+    private void NavigateProfile()
+    {
+        if(UserState.Value.IsAuthenticated)
+        {
+            // TODO: Navigate to profile page
+        }
+        else
+        {
+            Dispatcher.Dispatch(new AuthenticateAction());
+        }
+    }
+
+    private void ToggleDrawer()
     {
         _isOpenDrawer = !_isOpenDrawer;
     }

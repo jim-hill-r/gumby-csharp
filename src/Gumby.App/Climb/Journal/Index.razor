@@ -122,12 +122,6 @@ else
     protected override void OnInit()
     {
         JournalState.Subscribe(this);
-        var token = new Uri(UriHelper.GetAbsoluteUri()).Fragment.Replace("#id_token=","");
-        if(token.Length > 0)
-        {
-            //TODO: Throw logged in action
-            UriHelper.NavigateTo("/index.html");
-        }
     }
 
     void OpenAddJournalModal()
