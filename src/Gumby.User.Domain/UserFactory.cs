@@ -12,7 +12,7 @@ namespace Gumby.User.Domain
                 return new UserData
                 {
                     Id = Guid.Empty,
-                    Username = "Guest"
+                    Username = "Login"
                 };
             }
         }
