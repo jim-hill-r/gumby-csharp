@@ -21,7 +21,7 @@ namespace Gumby.Climb.Database
         
         public async Task<IEnumerable<JournalData>> GetManyAsync(int count)
         {
-            return _context.Journals.OrderBy(j => j.OccurredAt).Take(count);
+            return _context.Journals.OrderByDescending(j => j.OccurredAt).Take(count);
         }
 
         public async Task<JournalData> GetAsync(Guid id)
