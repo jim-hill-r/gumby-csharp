@@ -23,7 +23,7 @@ namespace Gumby.Climb.Journal.Api
             HttpRequest req,
             ILogger log)
         {
-            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection", EnvironmentVariableTarget.Process);
+            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection");
             var journalRepository = new AzureSQLJournalRepository(str);
             var journalData = await journalRepository.GetManyAsync(10);
             return new OkObjectResult(journalData);
@@ -37,7 +37,7 @@ namespace Gumby.Climb.Journal.Api
             string id)
         {
             Guid guid = new Guid(id);
-            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection", EnvironmentVariableTarget.Process);
+            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection");
             var journalRepository = new AzureSQLJournalRepository(str);
             var journalData = await journalRepository.GetAsync(guid);
             return new OkObjectResult(journalData);
@@ -51,7 +51,7 @@ namespace Gumby.Climb.Journal.Api
         {
             var requestBodyTask = new StreamReader(req.Body).ReadToEndAsync();
 
-            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection", EnvironmentVariableTarget.Process);
+            var str = Environment.GetEnvironmentVariable("GumbySQL-Connection");
             var journalRepository = new AzureSQLJournalRepository(str);
             JournalData journalBody = JsonConvert.DeserializeObject<JournalData>(await requestBodyTask);
             journalRepository.CreateAsync(journalBody);
