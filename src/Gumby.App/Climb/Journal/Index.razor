@@ -33,7 +33,7 @@ else
     {
         <MatCard>
                 <GumbyUserDetail></GumbyUserDetail> - <GumbyDateTime></GumbyDateTime> <MatIcon Icon="@MatIconNames.Arrow_downward"></MatIcon>
-                <GumbyTextBox></GumbyTextBox>
+                <GumbyTextBox Value="@journal.Text"></GumbyTextBox>
                 <GumbyImageDetail></GumbyImageDetail>
                 <GumbyProtectionDetail></GumbyProtectionDetail>
                 <GumbyRouteDetail></GumbyRouteDetail>
@@ -46,7 +46,7 @@ else
 
 <MatDialog IsOpen="@_isOpenAddJournalModal">
     <MatDialogContent>
-        <GumbyTextBox></GumbyTextBox>
+        <GumbyTextBox Value="@_addJournalDialogText" ReadOnly="false"></GumbyTextBox>
         <GumbyClimbSnackbar></GumbyClimbSnackbar>
     </MatDialogContent>
     <MatDialogActions>
@@ -56,7 +56,7 @@ else
 </MatDialog>
 
 @functions{
-
+    private string _addJournalDialogText = "";
     private bool _isOpenAddJournalModal = false;
 
     protected override void OnInit()
@@ -71,7 +71,7 @@ else
 
     private void OkAddJournalClicked()
     {
-        Dispatcher.Dispatch(new AddJournalAction());
+        Dispatcher.Dispatch(new AddJournalAction() { Name = _addJournalDialogText });
         _isOpenAddJournalModal = false;
     }
 
