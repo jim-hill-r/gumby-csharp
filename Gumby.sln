@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Climb.Journal.Contrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.App", "src\Gumby.App\Gumby.App.csproj", "{75DC5FB7-4A32-4BBD-A71D-5E28C332AA74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gumby.Climb.Journal.Api", "src\Gumby.Climb.Journal.Api\Gumby.Climb.Journal.Api.csproj", "{7E53BD96-3750-48DB-86BF-F2BA30489546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Climb.Journal.Api", "src\Gumby.Climb.Journal.Api\Gumby.Climb.Journal.Api.csproj", "{7E53BD96-3750-48DB-86BF-F2BA30489546}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Climb.Persistence", "src\Gumby.Climb.Persistence\Gumby.Climb.Persistence.csproj", "{6FE9E5AF-4855-4578-A201-DADC159F3E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gumby.Infrastructure", "Infrastructure\Gumby.Infrastructure\Gumby.Infrastructure.csproj", "{91ADA077-F88E-4EFA-A52F-6AED262F58AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{6FE9E5AF-4855-4578-A201-DADC159F3E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FE9E5AF-4855-4578-A201-DADC159F3E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FE9E5AF-4855-4578-A201-DADC159F3E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91ADA077-F88E-4EFA-A52F-6AED262F58AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91ADA077-F88E-4EFA-A52F-6AED262F58AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91ADA077-F88E-4EFA-A52F-6AED262F58AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91ADA077-F88E-4EFA-A52F-6AED262F58AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
