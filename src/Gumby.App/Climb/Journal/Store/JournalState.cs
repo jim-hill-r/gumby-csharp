@@ -6,18 +6,15 @@ namespace Gumby.App.Climb.Journal.Store
 {
     public class JournalState
     {
-        public Dictionary<Guid,string> RouteNames { get; private set; }
         public List<JournalData> Journals { get; private set; }
 
         public JournalState()
         {
-            this.RouteNames = new Dictionary<Guid, string>();
             this.Journals = new List<JournalData>();
         }
-        public JournalState(List<JournalData> journals, Dictionary<Guid,string> routeNames)
+        public JournalState(List<JournalData> journals)
         {
             Journals = journals;
-            RouteNames = routeNames;
         }
     }
 }

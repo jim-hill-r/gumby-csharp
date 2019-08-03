@@ -3,6 +3,7 @@
 @page "/index.html"
 
 @using Blazor.Fluxor
+@using Gumby.App.Shared
 @using Gumby.App.Climb.Journal.Store
 @using Gumby.Climb.Journal.Contract
 @using Gumby.Climb.Journal.Domain
@@ -31,31 +32,11 @@ else
     @foreach (var journal in JournalState.Value.Journals)
     {
         <MatCard>
-            <h3>
-                @journal.Name
-                @if (@journal.OccurredAt.HasValue)
-                {
-                    <span style="margin-left:10px;">
-                        @journal.OccurredAt.Value.UtcDateTime.ToLocalTime().ToString("g")
-                    </span>
-                }
-            </h3>
-            @if (journal.ProtectionType.HasValue)
-            {
-                <div> Style: @journal.ProtectionType.Value.GetDisplayName()</div>
-            }
-
-            <div>
-                Route:
-                @if (JournalState.Value.RouteNames.ContainsKey(journal.Id))
-                {
-                    @JournalState.Value.RouteNames[journal.Id]
-                }
-                else
-                {
-                    <i> Searching for route based on journal analysis....</i>
-                }
-            </div>
+                <GumbyUserDetail></GumbyUserDetail> - <GumbyDateTime></GumbyDateTime> <MatIcon Icon="@MatIconNames.Arrow_downward"></MatIcon>
+                <GumbyTextBox></GumbyTextBox>
+                <GumbyImageDetail></GumbyImageDetail>
+                <GumbyProtectionDetail></GumbyProtectionDetail>
+                <GumbyRouteDetail></GumbyRouteDetail>
         </MatCard>
     }
 
@@ -64,25 +45,9 @@ else
 <MatFAB class="app-fab--fixed" OnClick="@OpenAddJournalModal" Icon="@MatIconNames.Add"></MatFAB>
 
 <MatDialog IsOpen="@_isOpenAddJournalModal">
-    <MatDialogTitle>New Journal Entry</MatDialogTitle>
     <MatDialogContent>
-        <div style="margin:15px">
-            <label style="width:100%; text-align:center;">
-                <input id="imageUpload" ref="_imageUpload" style="display: none;" type="file" accept="image/x-png,image/jpg,image/gif" />
-                <MatIcon Icon="@MatIconNames.Image_search"></MatIcon>
-            </label>
-        </div>
-        <div style="margin:15px">
-            <MatTextField @bind-Value="@NewJournalName" Label="Name" Outlined="true" Style="width:100%"></MatTextField>
-        </div>
-        <div style="margin:15px">
-            <MatSelect @bind-Value="@NewJournalProtection" Label="Style" Outlined="true" Style="width:100%">
-                @foreach (var protection in _protectionTypes)
-                {
-                    <MatOption Value="@protection.ToString()">@protection.GetDisplayName()</MatOption>
-                }
-            </MatSelect>
-        </div>
+        <GumbyTextBox></GumbyTextBox>
+        <GumbyClimbSnackbar></GumbyClimbSnackbar>
     </MatDialogContent>
     <MatDialogActions>
         <MatButton OnClick="@CancelAddJournalClicked">Cancel</MatButton>
@@ -92,68 +57,25 @@ else
 
 @functions{
 
-    private ElementRef _imageUpload;
-
-    private IList<ProtectionType> _protectionTypes = ProtectionTypeHelper.GetAll();
     private bool _isOpenAddJournalModal = false;
-
-    private string _newJournalName;
-    public string NewJournalName
-    {
-        get => _newJournalName;
-        set
-        {
-            _newJournalName = value;
-            this.StateHasChanged();
-        }
-    }
-
-    private string _newJournalProtection;
-    public string NewJournalProtection
-    {
-        get => _newJournalProtection;
-        set
-        {
-            _newJournalProtection = value;
-            this.StateHasChanged();
-        }
-    }
 
     protected override void OnInit()
     {
         JournalState.Subscribe(this);
     }
 
-    void OpenAddJournalModal()
+    private void OpenAddJournalModal()
     {
-        NewJournalName = JournalHelper.GetNewName(DateTime.Now);
-        if (JournalState.Value.Journals.Count > 0)
-        {
-            NewJournalProtection = JournalState.Value.Journals[0].ProtectionType.ToString();
-        }
-        else
-        {
-            NewJournalProtection = ProtectionType.BOULDER.ToString();
-        }
         _isOpenAddJournalModal = true;
     }
 
-    void OkAddJournalClicked()
+    private void OkAddJournalClicked()
     {
-        var addJournalAction = new AddJournalAction();
-        addJournalAction.Name = NewJournalName;
-
-        ProtectionType protectionType;
-        if (Enum.TryParse(NewJournalProtection, out protectionType))
-        {
-            addJournalAction.ProtectionType = protectionType;
-        }
-
-        Dispatcher.Dispatch(addJournalAction);
+        Dispatcher.Dispatch(new AddJournalAction());
         _isOpenAddJournalModal = false;
     }
 
-    void CancelAddJournalClicked()
+    private void CancelAddJournalClicked()
     {
         _isOpenAddJournalModal = false;
     }

@@ -6,7 +6,6 @@ namespace Gumby.App.User.Store
     {
         public bool IsAuthenticated { get; private set; }
         public UserData User { get; private set; }
-
         public string Token { get; private set; }
 
         public UserState()

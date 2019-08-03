@@ -12,7 +12,7 @@ namespace Gumby.App.Climb.Journal.Store
             var newJournalData = new JournalData()
             {
                 Id = Guid.NewGuid(),
-                Name = action.Name,
+                Text = action.Name,
                 OccurredAt = action.OccurredAt ?? DateTime.UtcNow,
                 ProtectionType = action.ProtectionType ?? ProtectionType.NONE
             };

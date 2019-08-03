@@ -29,7 +29,7 @@ namespace Gumby.App.Climb.Journal.Store
                 var newJournalData = new JournalData()
                 {
                     Id = Guid.NewGuid(),
-                    Name = action.Name,
+                    Text = action.Name,
                     OccurredAt = action.OccurredAt ?? DateTime.UtcNow,
                     ProtectionType = action.ProtectionType ?? ProtectionType.NONE
                 };
@@ -40,7 +40,7 @@ namespace Gumby.App.Climb.Journal.Store
                 // Should really dispatch an error action
             }
             var completeAction = new FetchJournalAction();
-            dispatcher.Dispatch(completeAction);
+            //dispatcher.Dispatch(completeAction);
         }
     }
 }

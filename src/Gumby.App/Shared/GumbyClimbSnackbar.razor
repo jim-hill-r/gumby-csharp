@@ -1,0 +1,14 @@
+@inherits LayoutComponentBase
+
+<div style="margin:15px">
+    <label style="width:100%; text-align:center;">
+        <input id="imageUpload" ref="_imageUpload" style="display: none;" type="file" accept="image/x-png,image/jpg,image/gif" />
+        <MatIcon Icon="@MatIconNames.Image_search"></MatIcon>
+    </label>
+    <MatIcon Icon="@MatIconNames.Link"></MatIcon>
+    <MatIcon Icon="@MatIconNames.Local_activity"></MatIcon>
+</div>
+
+@functions{
+    private ElementRef _imageUpload;
+}

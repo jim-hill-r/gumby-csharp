@@ -12,8 +12,7 @@ namespace Gumby.App.Climb.Journal.Store
         {
             return new JournalState
             (
-                journals: action.Journals.OrderByDescending(j => j.OccurredAt).ToList(), 
-                routeNames: state.RouteNames                
+                journals: action.Journals.OrderByDescending(j => j.OccurredAt).ToList()               
             );
         }
     }
