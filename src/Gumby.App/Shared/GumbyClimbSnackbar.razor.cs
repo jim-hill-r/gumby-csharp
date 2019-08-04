@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gumby.App.Shared
 {
-    public class GumbyTextBoxBase : ComponentBase
+    public class GumbyClimbSnackbarBase : ComponentBase
     {
-        [Parameter] public string Value { get; set; } = "";
-        [Parameter] public bool ReadOnly { get; set; } = true;
+        protected ElementRef _imageUpload { get; set; }
     }
 }

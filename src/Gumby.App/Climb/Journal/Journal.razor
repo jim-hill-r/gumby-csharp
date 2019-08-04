@@ -1,0 +1,55 @@
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Layouts
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.JSInterop
+@using MatBlazor
+@using Gumby.App
+@using Gumby.App.Shared
+@using Gumby.App.Climb.Journal
+@inherits JournalBase
+@page "/"
+@page  "/index.html"
+
+<style>
+    .app-fab--fixed {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+</style>
+
+@if (_journalState.Value.Journals.Count == 0)
+{
+    <MatCard>
+        <h3> Welcome to Gumby Climb!</h3>
+        <p> Click the blue + button below to add your first climb journal entry.</p>
+    </MatCard>
+}
+else
+{
+    @foreach (var journal in _journalState.Value.Journals)
+    {
+        <MatCard>
+            <GumbyUserDetail></GumbyUserDetail> - <GumbyDateTime></GumbyDateTime> <MatIcon Icon="@MatIconNames.Arrow_downward"></MatIcon>
+            <GumbyTextBox Value="@journal.Text"></GumbyTextBox>
+            <GumbyImageDetail></GumbyImageDetail>
+            <GumbyProtectionDetail></GumbyProtectionDetail>
+            <GumbyRouteDetail></GumbyRouteDetail>
+        </MatCard>
+    }
+
+}
+
+<MatFAB class="app-fab--fixed" OnClick="@OpenAddJournalModal" Icon="@MatIconNames.Add"></MatFAB>
+
+<MatDialog IsOpen="@_isOpenAddJournalModal">
+    <MatDialogContent>
+        <GumbyTextBox Value="@_addJournalDialogText" ReadOnly="false"></GumbyTextBox>
+        <GumbyClimbSnackbar></GumbyClimbSnackbar>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@CancelAddJournalClicked">Cancel</MatButton>
+        <MatButton OnClick="@OkAddJournalClicked">OK</MatButton>
+    </MatDialogActions>
+</MatDialog>

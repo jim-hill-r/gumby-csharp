@@ -1,10 +1,13 @@
-﻿@layout MainLayout
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Layouts
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.JSInterop
+@using MatBlazor
+@using Gumby.App
+@using Gumby.App.Shared
+@inherits RouteBase
 @page "/routes"
-
-@using Blazor.Fluxor
-@using Gumby.App.Climb.Route.Store
-@inject IState<RouteState> RouteState
-@inject IDispatcher Dispatcher
 
 <style>
     .app-fab--fixed {
@@ -15,7 +18,7 @@
 </style>
 
 <MatList SingleSelection="true" TwoLine="true">
-    @if (RouteState.Value.Routes.Count == 0)
+    @if (_routeState.Value.Routes.Count == 0)
     {
         <MatListItem>
             <MatListItemText>
@@ -30,7 +33,7 @@
     }
     else
     {
-        @foreach (var route in RouteState.Value.Routes)
+        @foreach (var route in _routeState.Value.Routes)
         {
             <MatListItem>
                 <MatListItemText>
@@ -58,23 +61,3 @@
         <MatButton OnClick="@OkAddRouteClicked">OK</MatButton>
     </MatDialogActions>
 </MatDialog>
-
-@functions{
-    private bool _isOpenAddRouteModal = false;
-
-    void OpenAddRouteModal()
-    {
-        _isOpenAddRouteModal = true;
-    }
-
-    void OkAddRouteClicked()
-    {
-        Dispatcher.Dispatch(new AddRouteAction());
-        _isOpenAddRouteModal = false;
-    }
-
-    void CancelAddRouteClicked()
-    {
-        _isOpenAddRouteModal = false;
-    }
-}

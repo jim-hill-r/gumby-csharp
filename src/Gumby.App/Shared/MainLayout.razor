@@ -1,21 +1,13 @@
-@inherits LayoutComponentBase
-@inject Blazor.Fluxor.IStore Store
-
-@using Blazor.Fluxor
-@using Gumby.App.User.Store
-@inject IState<UserState> UserState
-@inject IDispatcher Dispatcher
-@inject IUriHelper UriHelper
-
-@Store.Initialize()
+@using MatBlazor
+@inherits MainLayoutBase
 
 <MatDrawerContainer Style="width: 100vw; height: 100vh;">
     <MatDrawer @bind-Opened="@_isOpenDrawer" Mode="@MatDrawerMode.Modal">
         <MatList>
             <MatListItem OnClick="@NavigateProfile"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
-                @if (UserState.Value.IsAuthenticated)
+                @if (_userState.Value.IsAuthenticated)
                 {
-                    <span> @UserState.Value.User.Username  </span>;
+                    <span> @_userState.Value.User.Username  </span>;
                 }
                 else
                 {
@@ -47,36 +39,3 @@
         </MatAppBarContainer>
     </MatDrawerContent>
 </MatDrawerContainer>
-
-@functions{
-    private bool _isOpenDrawer = false;
-
-    protected override void OnInit()
-    {
-        UserState.Subscribe(this);
-        var currentUri = new Uri(UriHelper.GetAbsoluteUri());
-        var token = currentUri.Fragment.Replace("#id_token=","");
-        if(token.Length > 0)
-        {
-            Dispatcher.Dispatch(new TokenReceivedAction(token));
-            UriHelper.NavigateTo(currentUri.ToString().Replace(currentUri.Fragment,""));
-        }
-    }
-
-    private void NavigateProfile()
-    {
-        if(UserState.Value.IsAuthenticated)
-        {
-            // TODO: Navigate to profile page
-        }
-        else
-        {
-            Dispatcher.Dispatch(new AuthenticateAction());
-        }
-    }
-
-    private void ToggleDrawer()
-    {
-        _isOpenDrawer = !_isOpenDrawer;
-    }
-}

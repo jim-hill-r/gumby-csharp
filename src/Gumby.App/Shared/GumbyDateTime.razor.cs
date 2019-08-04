@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gumby.App.Shared
 {
-    public class GumbyTextBoxBase : ComponentBase
+    public class GumbyDateTimeBase : ComponentBase
     {
-        [Parameter] public string Value { get; set; } = "";
-        [Parameter] public bool ReadOnly { get; set; } = true;
     }
 }

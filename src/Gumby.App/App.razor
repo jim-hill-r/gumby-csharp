@@ -1,11 +1,9 @@
-﻿<MatThemeProvider Theme="@theme">
+﻿@using Microsoft.AspNetCore.Components.Routing
+@using MatBlazor
+@inherits AppBase
+@inject Blazor.Fluxor.IStore Store
+@Store.Initialize()
+
+<MatThemeProvider Theme="@_theme">
     <Router AppAssembly=typeof(Program).Assembly />
 </MatThemeProvider>
-
-@functions{
-    MatTheme theme = new MatTheme()
-    {
-        Primary = MatThemeColors.Green._600.Value,
-        Secondary = MatThemeColors.Indigo._500.Value
-    };
-}
