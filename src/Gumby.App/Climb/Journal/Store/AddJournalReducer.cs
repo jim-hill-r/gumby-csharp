@@ -1,7 +1,6 @@
-﻿using System;
-using Blazor.Fluxor;
-using Gumby.Climb.Journal.Contract;
-using Gumby.Climb.Route.Contract;
+﻿using Blazor.Fluxor;
+using Gumby.Graph.Vertex.Climb.Journal;
+using System;
 
 namespace Gumby.App.Climb.Journal.Store
 {
@@ -9,12 +8,11 @@ namespace Gumby.App.Climb.Journal.Store
     {
         public override JournalState Reduce(JournalState state, AddJournalAction action)
         {
-            var newJournalData = new JournalData()
+            var newJournalData = new PostFull()
             {
                 Id = Guid.NewGuid(),
                 Text = action.Name,
-                OccurredAt = action.OccurredAt ?? DateTime.UtcNow,
-                ProtectionType = action.ProtectionType ?? ProtectionType.NONE
+                OccurredAt = action.OccurredAt ?? DateTime.UtcNow
             };
             state.Journals.Insert(0, newJournalData);
 

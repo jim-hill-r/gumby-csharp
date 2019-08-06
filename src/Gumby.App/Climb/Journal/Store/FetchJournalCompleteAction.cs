@@ -1,14 +1,13 @@
-﻿using Blazor.Fluxor;
-using Gumby.Climb.Journal.Contract;
+﻿using Gumby.Graph.Vertex.Climb.Journal;
 using System.Collections.Generic;
 
 namespace Gumby.App.Climb.Journal.Store
 {
-    public class FetchJournalCompleteAction : IAction
+    public class FetchJournalCompleteAction
     {
-        public readonly List<JournalData> Journals;
+        public readonly List<PostFull> Journals;
 
-        public FetchJournalCompleteAction(List<JournalData> journals)
+        public FetchJournalCompleteAction(List<PostFull> journals)
         {
             this.Journals = journals;
         }

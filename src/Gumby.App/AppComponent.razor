@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+@using MatBlazor
+@using Gumby.App
+@inherits AppComponentBase
+@inject Blazor.Fluxor.IStore Store
+@Store.Initialize()
+
+<MatThemeProvider Theme="@_theme">
+    <Router AppAssembly=typeof(Program).Assembly />
+</MatThemeProvider>

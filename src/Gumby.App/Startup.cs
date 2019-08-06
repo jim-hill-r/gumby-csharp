@@ -1,7 +1,6 @@
 using Blazor.Fluxor;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace Gumby.App
 {
@@ -16,8 +15,7 @@ namespace Gumby.App
 
         public void Configure(IComponentsApplicationBuilder app)
         {
-            app.UseLocalTimeZone();
-            app.AddComponent<App>("app");
+            app.AddComponent<AppComponentBase>("app");
         }
     }
 }

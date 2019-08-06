@@ -1,10 +1,8 @@
 ﻿using Blazor.Fluxor;
-using Gumby.Climb.Journal.Contract;
-using Gumby.Climb.Route.Contract;
+using Gumby.Graph.Vertex.Climb.Journal;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -26,14 +24,13 @@ namespace Gumby.App.Climb.Journal.Store
         {
             try
             {
-                var newJournalData = new JournalData()
+                var newJournalData = new PostFull()
                 {
                     Id = Guid.NewGuid(),
                     Text = action.Name,
-                    OccurredAt = action.OccurredAt ?? DateTime.UtcNow,
-                    ProtectionType = action.ProtectionType ?? ProtectionType.NONE
+                    OccurredAt = action.OccurredAt ?? DateTime.UtcNow
                 };
-                await HttpClient.PostJsonAsync<List<JournalData>>($"{API_ROOT}/{API_ENDPOINT}", newJournalData);
+                await HttpClient.PostJsonAsync<List<PostFull>>($"{API_ROOT}/{API_ENDPOINT}", newJournalData);
             }
             catch
             {

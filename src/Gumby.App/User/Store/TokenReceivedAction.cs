@@ -2,7 +2,7 @@
 
 namespace Gumby.App.User.Store
 {
-    public class TokenReceivedAction : IAction
+    public class TokenReceivedAction
     {
         public string Token { get; }
 

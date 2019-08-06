@@ -1,9 +1,0 @@
-﻿@using Microsoft.AspNetCore.Components.Routing
-@using MatBlazor
-@inherits AppBase
-@inject Blazor.Fluxor.IStore Store
-@Store.Initialize()
-
-<MatThemeProvider Theme="@_theme">
-    <Router AppAssembly=typeof(Program).Assembly />
-</MatThemeProvider>

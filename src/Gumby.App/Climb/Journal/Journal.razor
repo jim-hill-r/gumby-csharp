@@ -1,4 +1,6 @@
-﻿@using System.Net.Http
+﻿@page "/,index.html"
+
+@using System.Net.Http
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Layouts
 @using Microsoft.AspNetCore.Components.Routing
@@ -8,8 +10,7 @@
 @using Gumby.App.Shared
 @using Gumby.App.Climb.Journal
 @inherits JournalBase
-@page "/"
-@page  "/index.html"
+
 
 <style>
     .app-fab--fixed {
@@ -31,7 +32,7 @@ else
     @foreach (var journal in _journalState.Value.Journals)
     {
         <MatCard>
-            <GumbyUserDetail></GumbyUserDetail> - <GumbyDateTime></GumbyDateTime> <MatIcon Icon="@MatIconNames.Arrow_downward"></MatIcon>
+            <GumbyUserDetail></GumbyUserDetail> - <GumbyDateTime Value="@journal.OccurredAt"></GumbyDateTime> <MatIcon Icon="@MatIconNames.Arrow_downward"></MatIcon>
             <GumbyTextBox Value="@journal.Text"></GumbyTextBox>
             <GumbyImageDetail></GumbyImageDetail>
             <GumbyProtectionDetail></GumbyProtectionDetail>

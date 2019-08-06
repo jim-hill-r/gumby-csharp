@@ -3,7 +3,6 @@ using Gumby.App.User.Store;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Layouts;
 using System;
-using MatBlazor;
 
 namespace Gumby.App.Shared
 {

@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Blazor.Fluxor;
 using System.Linq;
-using Blazor.Fluxor;
-using Gumby.Climb.Journal.Contract;
-using Gumby.Climb.Route.Contract;
 
 namespace Gumby.App.Climb.Journal.Store
 {

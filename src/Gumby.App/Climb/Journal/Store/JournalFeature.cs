@@ -1,7 +1,4 @@
 ﻿using Blazor.Fluxor;
-using Gumby.Climb.Journal.Contract;
-using System;
-using System.Collections.Generic;
 
 namespace Gumby.App.Climb.Journal.Store
 {

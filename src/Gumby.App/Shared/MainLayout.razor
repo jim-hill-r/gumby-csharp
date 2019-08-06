@@ -1,13 +1,15 @@
+@using Gumby.App.Shared
 @using MatBlazor
 @inherits MainLayoutBase
 
 <MatDrawerContainer Style="width: 100vw; height: 100vh;">
-    <MatDrawer @bind-Opened="@_isOpenDrawer" Mode="@MatDrawerMode.Modal">
+    <MatDrawer @bind -Opened="@_isOpenDrawer" Mode="@MatDrawerMode.Modal">
         <MatList>
-            <MatListItem OnClick="@NavigateProfile"> <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
+            <MatListItem OnClick="@NavigateProfile">
+                <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
                 @if (_userState.Value.IsAuthenticated)
                 {
-                    <span> @_userState.Value.User.Username  </span>;
+                    <span> @_userState.Value.User.Name  </span>;
                 }
                 else
                 {
@@ -16,8 +18,6 @@
             </MatListItem>
             <MatListDivider></MatListDivider>
             <MatListItem OnClick="@ToggleDrawer" Href="/"> <MatIconButton Icon="@MatIconNames.Pages"></MatIconButton> Journal </MatListItem>
-            <MatListDivider></MatListDivider>
-            <MatListItem OnClick="@ToggleDrawer" Href="/routes"> <MatIconButton Icon="@MatIconNames.Flag"></MatIconButton> Routes </MatListItem>
         </MatList>
     </MatDrawer>
     <MatDrawerContent>
