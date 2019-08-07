@@ -14,18 +14,26 @@ var filesToCache = [
     '/icons/gumby-512x512.png',
 
     // Blazor / WASM framework
-    '/_framework/blazor.webassembly.js',
     '/_framework/blazor.boot.json',
     '/_framework/blazor.server.js',
+    '/_framework/blazor.webassembly.js',
     '/_framework/wasm/mono.js',
     '/_framework/wasm/mono.wasm',
     
     // Project Dependencies
+    '/_framework/_bin/Blazor.Fluxor.dll',
+    '/_framework/_bin/MatBlazor.dll',
+    '/_framework/_bin/Microsoft.AspNetCore.Authorization.dll',
     '/_framework/_bin/Microsoft.AspNetCore.Blazor.dll',
     '/_framework/_bin/Microsoft.AspNetCore.Components.Browser.dll',
     '/_framework/_bin/Microsoft.AspNetCore.Components.dll',
+    '/_framework/_bin/Microsoft.AspNetCore.Metadata.dll',
+    '/_framework/_bin/Microsoft.Bcl.AsyncInterfaces.dll',
     '/_framework/_bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll',
     '/_framework/_bin/Microsoft.Extensions.DependencyInjection.dll',
+    '/_framework/_bin/Microsoft.Extensions.Logging.Abstractions.dll',
+    '/_framework/_bin/Microsoft.Extensions.Options.dll',
+    '/_framework/_bin/Microsoft.Extensions.Primitives.dll',
     '/_framework/_bin/Microsoft.JSInterop.dll',
     '/_framework/_bin/Mono.Security.dll',
     '/_framework/_bin/Mono.WebAssembly.Interop.dll',
@@ -40,20 +48,14 @@ var filesToCache = [
     '/_framework/_bin/System.Runtime.CompilerServices.Unsafe.dll',
     '/_framework/_bin/System.Text.Json.dll',
     '/_framework/_bin/System.Threading.Tasks.Extensions.dll',
-    '/_framework/_bin/MatBlazor.dll',
-    '/_framework/_bin/Blazor.Fluxor.dll',
-    '/_framework/_bin/Toolbelt.Blazor.TimeZoneKit.dll',
 
     // Content Dependencies
     '/_content/MatBlazor/dist/matBlazor.js',
 
     // Project Assemblies
     '/_framework/_bin/Gumby.App.dll',
-    '/_framework/_bin/Gumby.Climb.Journal.Contract.dll',
-    '/_framework/_bin/Gumby.Climb.Journal.Domain.dll',
-    '/_framework/_bin/Gumby.Climb.Route.Contract.dll',
-    '/_framework/_bin/Gumby.User.Contract.dll',
-    '/_framework/_bin/Gumby.User.Domain.dll'
+    '/_framework/_bin/Gumby.Domain.dll',
+    '/_framework/_bin/Gumby.Graph.dll'
 
     // Routed Pages
     //'/routes'

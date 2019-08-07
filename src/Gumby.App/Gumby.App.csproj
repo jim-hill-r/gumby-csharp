@@ -2,28 +2,30 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RestoreAdditionalProjectSources>
-      https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
-      https://dotnet.myget.org/F/blazor-dev/api/v3/index.json;
-    </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>Gumby.App</AssemblyName>
-    <RootNamespace>Gumby.App</RootNamespace>
-    <ApplicationIcon />
-    <OutputType>Library</OutputType>
-    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Blazor.Fluxor" Version="0.26.0-pre" />
-    <PackageReference Include="MatBlazor" Version="1.4.0" />
+    <PackageReference Include="MatBlazor" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview7.19365.7" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview7.19365.7" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.0.0-preview7.19365.7" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gumby.Domain\Gumby.Domain.csproj" />
     <ProjectReference Include="..\Gumby.Graph\Gumby.Graph.csproj" />
   </ItemGroup>
 

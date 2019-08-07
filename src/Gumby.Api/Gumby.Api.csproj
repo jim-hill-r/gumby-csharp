@@ -5,6 +5,14 @@
     <RootNamespace>Gumby.Api</RootNamespace>
     <AssemblyName>Gumby.Api</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.29" />
   </ItemGroup>
