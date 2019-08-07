@@ -7,20 +7,23 @@ using Microsoft.AspNetCore.Components.Layouts;
 namespace Gumby.App.Climb.Journal
 {
     [Layout(typeof(MainLayout))]
-    public class JournalBase : ComponentBase
+    public class JournalAddBase : ComponentBase
     {
         [Inject] protected IState<JournalState> _journalState { get; set; }
         [Inject] protected IDispatcher _dispatcher { get; set; }
         [Inject] protected IUriHelper _uriHelper { get; set; }
-        
+
+        protected string _addJournalDialogText = "";
+
         protected override void OnInit()
         {
             _journalState.Subscribe(this);
         }
-
-        protected void NavigateToAddPost()
+        
+        protected void OkAddJournalClicked()
         {
-            _uriHelper.NavigateTo("/post/new");
+            _dispatcher.Dispatch(new AddJournalAction() { Name = _addJournalDialogText });
+            _uriHelper.NavigateTo("/");
         }
     }
 }

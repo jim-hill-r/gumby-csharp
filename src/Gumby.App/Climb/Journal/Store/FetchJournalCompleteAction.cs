@@ -5,11 +5,11 @@ namespace Gumby.App.Climb.Journal.Store
 {
     public class FetchJournalCompleteAction
     {
-        public readonly List<PostFull> Journals;
+        public readonly List<PostFull> Posts;
 
-        public FetchJournalCompleteAction(List<PostFull> journals)
+        public FetchJournalCompleteAction(List<PostFull> posts)
         {
-            this.Journals = journals;
+            this.Posts = posts;
         }
     }
 }

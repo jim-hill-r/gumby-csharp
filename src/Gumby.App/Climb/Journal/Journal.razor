@@ -13,37 +13,30 @@
     }
 </style>
 
-@if (_journalState.Value.Journals.Count == 0)
+@if (_journalState.Value.Posts.Count == 0)
 {
     <MatCard>
         <h3> Welcome to Gumby Climb!</h3>
-        <p> Click the blue + button below to add your first climb journal entry.</p>
+        <p> Click the blue + button below to add your first send.</p>
     </MatCard>
 }
 else
 {
-    @foreach (var journal in _journalState.Value.Journals)
+    @foreach (var post in _journalState.Value.Posts)
     {
         <MatCard>
-            <GumbyUserDetail></GumbyUserDetail> - <GumbyDateTime Value="@journal.OccurredAt"></GumbyDateTime> <MatIcon Icon="@MatIconNames.Arrow_downward"></MatIcon>
-            <GumbyTextBox Value="@journal.Text"></GumbyTextBox>
-            <GumbyImageDetail></GumbyImageDetail>
-            <GumbyProtectionDetail></GumbyProtectionDetail>
-            <GumbyRouteDetail></GumbyRouteDetail>
+            <GumbyUserDetail></GumbyUserDetail> - <GumbyDateTime Value="@post.OccurredAt"></GumbyDateTime>
+            <GumbyTextBox Value="@post.Text"></GumbyTextBox>
+            @if (post.Details != null)
+            {
+                foreach (var detail in post.Details)
+                {
+                    <GumbyDetail Value="@detail"></GumbyDetail>
+                }
+            }
         </MatCard>
     }
 
 }
 
-<MatFAB class="app-fab--fixed" OnClick="@OpenAddJournalModal" Icon="@MatIconNames.Add"></MatFAB>
-
-<MatDialog IsOpen="@_isOpenAddJournalModal">
-    <MatDialogContent>
-        <GumbyTextBox Value="@_addJournalDialogText" ReadOnly="false"></GumbyTextBox>
-        <GumbyClimbSnackbar></GumbyClimbSnackbar>
-    </MatDialogContent>
-    <MatDialogActions>
-        <MatButton OnClick="@CancelAddJournalClicked">Cancel</MatButton>
-        <MatButton OnClick="@OkAddJournalClicked">OK</MatButton>
-    </MatDialogActions>
-</MatDialog>
+<MatFAB class="app-fab--fixed" OnClick="@NavigateToAddPost" Icon="@MatIconNames.Add"></MatFAB>

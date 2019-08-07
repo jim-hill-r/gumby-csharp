@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Gumby.Domain.Common.DateTime.English
 {
@@ -16,35 +14,35 @@ namespace Gumby.Domain.Common.DateTime.English
             DateTimeOffset now = DateTimeOffset.UtcNow;
             TimeSpan timespan = now - datetime;
 
-            if (timespan.TotalDays > 14)
+            if (timespan.Days > 14)
             {
                 return datetime.ToLocalTime().DateTime.ToShortDateString();
             }
-            else if (timespan.TotalDays > 7)
+            else if (timespan.Days > 7)
             {
                 return $"last week";
             }
-            else if (timespan.TotalDays > 2)
+            else if (timespan.Days > 2)
             {
                 return $"{timespan.Days} days ago";
             }
-            else if (timespan.TotalDays > 1)
+            else if (timespan.Days > 1)
             {
                 return $"yesterday";
             }
-            else if (timespan.TotalHours > 2)
+            else if (timespan.Hours > 2)
             {
                 return $"{timespan.Hours} hours ago";
             }
-            else if (timespan.TotalHours > 1)
+            else if (timespan.Hours > 1)
             {
                 return $"{timespan.Hours} hour ago";
             }
-            else if (timespan.TotalMinutes > 0)
+            else if (timespan.Minutes > 0)
             {
                 return $"{timespan.Minutes} minutes ago";
             }
-            else if (timespan.TotalSeconds > 0)
+            else if (timespan.Seconds > 0)
             {
                 return $"{timespan.Seconds} seconds ago";
             }

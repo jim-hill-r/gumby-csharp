@@ -9,7 +9,7 @@ namespace Gumby.App.Climb.Journal.Store
         {
             return new JournalState
             (
-                journals: action.Journals.OrderByDescending(j => j.OccurredAt).ToList()               
+                posts: action.Posts.OrderByDescending(j => j.OccurredAt).ToList()               
             );
         }
     }

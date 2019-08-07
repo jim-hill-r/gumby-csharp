@@ -5,15 +5,15 @@ namespace Gumby.App.Climb.Journal.Store
 {
     public class JournalState
     {
-        public List<PostFull> Journals { get; private set; }
+        public List<PostFull> Posts { get; private set; }
 
         public JournalState()
         {
-            this.Journals = new List<PostFull>();
+            this.Posts = new List<PostFull>();
         }
-        public JournalState(List<PostFull> journals)
+        public JournalState(List<PostFull> posts)
         {
-            Journals = journals;
+            Posts = posts;
         }
     }
 }

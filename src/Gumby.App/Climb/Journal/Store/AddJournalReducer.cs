@@ -14,7 +14,7 @@ namespace Gumby.App.Climb.Journal.Store
                 Text = action.Name,
                 OccurredAt = action.OccurredAt ?? DateTime.UtcNow
             };
-            state.Journals.Insert(0, newJournalData);
+            state.Posts.Insert(0, newJournalData);
 
             return state;
         }

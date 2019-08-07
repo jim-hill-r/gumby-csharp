@@ -11,8 +11,6 @@ namespace Gumby.Graph.Vertex.Climb.Journal
     {
         public DateTimeOffset OccurredAt;
         public UserChunk CreatedBy;
-        public RouteChunk Route;
-        public StyleChunk Style;
-        public List<ImageChunk> Images;
+        public List<VertexChunk> Details;
     }
 }
