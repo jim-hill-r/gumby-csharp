@@ -1,10 +1,8 @@
 ﻿using Blazor.Fluxor;
 using Gumby.App.Climb.Journal.Store;
-using Microsoft.AspNetCore.Components;
 using Gumby.App.Shared;
-using MatBlazor;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Layouts;
-using Microsoft.JSInterop;
 
 namespace Gumby.App.Climb.Journal
 {

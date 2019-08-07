@@ -3,7 +3,7 @@
 @inherits MainLayoutBase
 
 <MatDrawerContainer Style="width: 100vw; height: 100vh;">
-    <MatDrawer @bind -Opened="@_isOpenDrawer" Mode="@MatDrawerMode.Modal">
+    <MatDrawer @bind-Opened="@_isOpenDrawer" Mode="@MatDrawerMode.Modal">
         <MatList>
             <MatListItem OnClick="@NavigateProfile">
                 <MatIconButton Icon="@MatIconNames.Person"></MatIconButton>
