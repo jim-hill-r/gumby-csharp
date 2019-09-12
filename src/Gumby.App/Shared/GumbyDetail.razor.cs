@@ -1,10 +1,10 @@
-﻿using Gumby.Graph.Vertex;
+﻿using Gumby.App.Climb.Journal.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Gumby.App.Shared
 {
     public class GumbyDetailBase : ComponentBase
     {
-        [Parameter] public VertexChunk Value { get; set; }
+        [Parameter] public Detail Value { get; set; }
     }
 }

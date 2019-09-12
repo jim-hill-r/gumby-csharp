@@ -1,15 +1,15 @@
 @using MatBlazor
 @inherits GumbyDetailBase
 
-@if (this.Value.VertexType.Equals("route"))
+@if (this.Value.Type.Equals("route"))
 {
     <GumbyRouteDetail></GumbyRouteDetail>
 }
-else if (this.Value.VertexType.Equals("image"))
+else if (this.Value.Type.Equals("image"))
 {
     <GumbyImageDetail></GumbyImageDetail>
 }
-else if (this.Value.VertexType.Equals("protection"))
+else if (this.Value.Type.Equals("protection"))
 {
     <GumbyImageDetail></GumbyImageDetail>
 }

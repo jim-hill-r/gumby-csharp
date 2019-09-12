@@ -1,5 +1,5 @@
 ﻿using Blazor.Fluxor;
-using Gumby.Graph.Vertex.Climb.Journal;
+using Gumby.App.Climb.Journal.Models;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,6 @@ namespace Gumby.App.Climb.Journal.Store
 {
     public class FetchJournalEffect : Effect<FetchJournalAction>
     {
-        public readonly string API_ROOT = "https://gumbysl.azurewebsites.net/api";
-        public readonly string API_ENDPOINT = "journal";
-
         private readonly HttpClient HttpClient;
 
         public FetchJournalEffect(HttpClient httpClient)
@@ -22,11 +19,12 @@ namespace Gumby.App.Climb.Journal.Store
 
         protected async override Task HandleAsync(FetchJournalAction action, IDispatcher dispatcher)
         {
-            var journals = new List<PostFull>();
+            HttpContent httpContent = null;
+
+            var journals = new List<Post>();
             try
             {
-                var journalArray = await HttpClient.GetJsonAsync<PostFull[]>($"{API_ROOT}/{API_ENDPOINT}");
-                journals = journalArray.ToList();
+                var response = await HttpClient.PostAsync(Endpoints.GraphQLAPI,httpContent);
             }
             catch
             {

@@ -1,11 +1,11 @@
-﻿using Gumby.Graph.Vertex.Common.User;
+﻿using Gumby.App.User.Models;
 
 namespace Gumby.App.User.Store
 {
     public class UserState
     {
         public bool IsAuthenticated { get; private set; }
-        public UserChunk User { get; private set; }
+        public UserInfo User { get; private set; }
         public string Token { get; private set; }
 
         public UserState()
@@ -13,7 +13,7 @@ namespace Gumby.App.User.Store
             IsAuthenticated = false;
         }
 
-        public UserState(bool isAuthenticated, string token, UserChunk user)
+        public UserState(bool isAuthenticated, string token, UserInfo user)
         {
             IsAuthenticated = isAuthenticated;
             Token = token;

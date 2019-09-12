@@ -1,5 +1,5 @@
 ﻿using Blazor.Fluxor;
-using Gumby.Graph.Vertex.Common.User;
+using Gumby.App.User.Models;
 using System;
 
 namespace Gumby.App.User.Store
@@ -8,7 +8,7 @@ namespace Gumby.App.User.Store
     {
         public override UserState Reduce(UserState state, TokenReceivedAction action)
         {
-            return new UserState(true, action.Token, new UserChunk() { Id = Guid.NewGuid(), Name = "Logged in" });
+            return new UserState(true, action.Token, new UserInfo() { Id = Guid.NewGuid(), Name = "Logged in" });
         }
     }
 }

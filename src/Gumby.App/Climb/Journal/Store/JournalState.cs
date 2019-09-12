@@ -1,17 +1,17 @@
-﻿using Gumby.Graph.Vertex.Climb.Journal;
+﻿using Gumby.App.Climb.Journal.Models;
 using System.Collections.Generic;
 
 namespace Gumby.App.Climb.Journal.Store
 {
     public class JournalState
     {
-        public List<PostFull> Posts { get; private set; }
+        public List<Post> Posts { get; private set; }
 
         public JournalState()
         {
-            this.Posts = new List<PostFull>();
+            this.Posts = new List<Post>();
         }
-        public JournalState(List<PostFull> posts)
+        public JournalState(List<Post> posts)
         {
             Posts = posts;
         }

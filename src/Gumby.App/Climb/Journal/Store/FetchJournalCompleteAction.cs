@@ -1,13 +1,13 @@
-﻿using Gumby.Graph.Vertex.Climb.Journal;
+﻿using Gumby.App.Climb.Journal.Models;
 using System.Collections.Generic;
 
 namespace Gumby.App.Climb.Journal.Store
 {
     public class FetchJournalCompleteAction
     {
-        public readonly List<PostFull> Posts;
+        public readonly List<Post> Posts;
 
-        public FetchJournalCompleteAction(List<PostFull> posts)
+        public FetchJournalCompleteAction(List<Post> posts)
         {
             this.Posts = posts;
         }

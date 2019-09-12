@@ -1,5 +1,5 @@
 ﻿using Blazor.Fluxor;
-using Gumby.Graph.Vertex.Climb.Journal;
+using Gumby.App.Climb.Journal.Models;
 using System;
 
 namespace Gumby.App.Climb.Journal.Store
@@ -8,7 +8,7 @@ namespace Gumby.App.Climb.Journal.Store
     {
         public override JournalState Reduce(JournalState state, AddJournalAction action)
         {
-            var newJournalData = new PostFull()
+            var newJournalData = new Post()
             {
                 Id = Guid.NewGuid(),
                 Text = action.Name,

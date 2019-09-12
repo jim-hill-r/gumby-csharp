@@ -32,6 +32,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GraphQL\Resolvers\" />
+    <Folder Include="GraphQL\Climb\Journal\Models\" />
   </ItemGroup>
 </Project>
