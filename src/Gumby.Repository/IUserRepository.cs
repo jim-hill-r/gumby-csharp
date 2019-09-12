@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gumby.Graph.Edge
+namespace Gumby.Repository
 {
-    public class Edge
+    public interface IUserRepository
     {
     }
 }
