@@ -1,0 +1,8 @@
+﻿@page "/post/new"
+
+@using MatBlazor
+@inherits PostNewBase
+
+<MatButton OnClick="@OkAddJournalClicked">Post</MatButton>
+<GumbyTextBox Value="@_addJournalDialogText" ReadOnly="false"></GumbyTextBox>
+<GumbyClimbSnackbar></GumbyClimbSnackbar>

@@ -1,6 +1,6 @@
-﻿using Gumby.Api.GraphQL.Types;
-using Gumby.Cache;
-using Gumby.Repository;
+﻿using Gumby.Api.GraphQL.Journal.Types;
+using Gumby.Repository.Journal;
+using Gumby.Graph.Journal;
 using HotChocolate;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,11 +18,11 @@ namespace Gumby.Api
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IClimbRepository, CachingClimbRepository>();
+            services.AddScoped<IJournalRepository, GraphJournalRepository>();
 
             services.AddGraphQL(sp => SchemaBuilder.New()
                 .AddServices(sp)
-                .AddQueryType<QueryType>()
+                .AddQueryType<JournalQueryType>()
                 .AddType<PostType>()
                 .Create()
             );

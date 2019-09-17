@@ -20,9 +20,6 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.29" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gumby.Cache\Gumby.Cache.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -32,6 +29,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GraphQL\Climb\Journal\Models\" />
+    <Folder Include="GraphQL\Climb\" />
+    <Folder Include="gRPC\" />
+    <Folder Include="REST\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gumby.Graph\Gumby.Graph.csproj" />
+    <ProjectReference Include="..\Gumby.Repository\Gumby.Repository.csproj" />
   </ItemGroup>
 </Project>

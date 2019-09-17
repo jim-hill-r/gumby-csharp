@@ -8,7 +8,7 @@ namespace Gumby.App.User.Store
     {
         public override UserState Reduce(UserState state, TokenReceivedAction action)
         {
-            return new UserState(true, action.Token, new UserInfo() { Id = Guid.NewGuid(), Name = "Logged in" });
+            return new UserState(true, action.Token, new UserFull() { Id = Guid.NewGuid(), Name = "Logged in" });
         }
     }
 }
