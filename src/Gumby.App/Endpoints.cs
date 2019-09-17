@@ -7,6 +7,6 @@ namespace Gumby.App
 {
     public static class Endpoints
     {
-        public static string GraphQLAPI = "localhost:7071/api/gql";
+        public static string GraphQLAPI = "http://localhost:7071/api/gql";
     }
 }
