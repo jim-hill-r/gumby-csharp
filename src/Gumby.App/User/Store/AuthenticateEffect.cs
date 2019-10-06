@@ -1,22 +1,22 @@
 ﻿using Blazor.Fluxor;
-using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 
 namespace Gumby.App.User.Store
 {
     public class AuthenticateEffect : Effect<AuthenticateAction>
     {
-        private readonly IUriHelper _uriHelper;
+        private readonly NavigationManager _navigationManager;
 
-        public AuthenticateEffect(IUriHelper uriHelper)
+        public AuthenticateEffect(NavigationManager navigationManager)
         {
-            _uriHelper = uriHelper;
+            _navigationManager = navigationManager;
         }
 
         protected async override Task HandleAsync(AuthenticateAction action, IDispatcher dispatcher)
         {
-            var currentUri = _uriHelper.GetAbsoluteUri();
+            var currentUri = _navigationManager.Uri;
             var host = new Uri(currentUri).Host;
             var clientId = new Guid("62c98281-193a-4884-a3a3-131eac593dff");
             if (host.Contains("jimhillr.dev"))
@@ -35,7 +35,7 @@ namespace Gumby.App.User.Store
                 "&scope=openid" +
                 "&response_type=id_token" +
                 "&prompt=login";
-            _uriHelper.NavigateTo(uriBuilder.ToString());
+            _navigationManager.NavigateTo(uriBuilder.ToString());
         }
     }
 }

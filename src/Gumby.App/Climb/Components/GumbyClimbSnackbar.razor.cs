@@ -4,6 +4,6 @@ namespace Gumby.App.Climb.Components
 {
     public class GumbyClimbSnackbarBase : ComponentBase
     {
-        protected ElementRef _imageUpload { get; set; }
+        protected ElementReference _imageUpload { get; set; }
     }
 }

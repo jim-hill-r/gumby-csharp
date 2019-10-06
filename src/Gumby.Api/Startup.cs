@@ -23,6 +23,7 @@ namespace Gumby.Api
             services.AddGraphQL(sp => SchemaBuilder.New()
                 .AddServices(sp)
                 .AddQueryType<JournalQueryType>()
+                .AddMutationType<JournalMutationType>()
                 .AddType<PostType>()
                 .Create()
             );

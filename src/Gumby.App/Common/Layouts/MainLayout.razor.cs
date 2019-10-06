@@ -1,7 +1,6 @@
 ﻿using Blazor.Fluxor;
 using Gumby.App.User.Store;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Layouts;
 using System;
 
 namespace Gumby.App.Common.Layouts
@@ -10,19 +9,19 @@ namespace Gumby.App.Common.Layouts
     {
         [Inject] protected IState<UserState> _userState { get; set; }
         [Inject] protected IDispatcher _dispatcher { get; set; }
-        [Inject] protected IUriHelper _uriHelper { get; set; }
+        [Inject] protected NavigationManager _navigationManager { get; set; }
 
         protected bool _isOpenDrawer = false;
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             _userState.Subscribe(this);
-            var currentUri = new Uri(_uriHelper.GetAbsoluteUri());
+            var currentUri = new Uri(_navigationManager.Uri);
             var token = currentUri.Fragment.Replace("#id_token=", "");
             if (token.Length > 0)
             {
                 _dispatcher.Dispatch(new TokenReceivedAction(token));
-                _uriHelper.NavigateTo(currentUri.ToString().Replace(currentUri.Fragment, ""));
+                _navigationManager.NavigateTo(currentUri.ToString().Replace(currentUri.Fragment, ""));
             }
         }
 

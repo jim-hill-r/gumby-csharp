@@ -2,7 +2,6 @@
 using Gumby.App.Climb.Journal.Store;
 using Gumby.App.Common.Layouts;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Layouts;
 
 namespace Gumby.App.Journal.Views
 {
@@ -11,11 +10,11 @@ namespace Gumby.App.Journal.Views
     {
         [Inject] protected IState<JournalState> _journalState { get; set; }
         [Inject] protected IDispatcher _dispatcher { get; set; }
-        [Inject] protected IUriHelper _uriHelper { get; set; }
+        [Inject] protected NavigationManager _navigationManager { get; set; }
 
         protected string _addJournalDialogText = "";
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             _journalState.Subscribe(this);
         }
@@ -23,7 +22,7 @@ namespace Gumby.App.Journal.Views
         protected void OkAddJournalClicked()
         {
             _dispatcher.Dispatch(new AddJournalAction() { Name = _addJournalDialogText });
-            _uriHelper.NavigateTo("/");
+            _navigationManager.NavigateTo("/");
         }
     }
 }
