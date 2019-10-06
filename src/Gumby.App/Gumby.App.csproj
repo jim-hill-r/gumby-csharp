@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gumby.Domain\Gumby.Domain.csproj" />
-    <ProjectReference Include="..\Gumby.Graph\Gumby.Graph.csproj" />
   </ItemGroup>
 
   <ItemGroup>

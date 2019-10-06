@@ -9,11 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Api", "src\Gumby.Api\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Domain", "src\Gumby.Domain\Gumby.Domain.csproj", "{FF9A9A24-7422-4FE3-BEA7-5646A1CB0709}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Graph", "src\Gumby.Graph\Gumby.Graph.csproj", "{25D155C9-BE59-407E-B7C3-ADDA6B1A6AE3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Repository", "src\Gumby.Repository\Gumby.Repository.csproj", "{59937EDC-861D-4445-9BC4-79B97488FE24}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gumby.Api.Test", "src\Gumby.Api.Test\Gumby.Api.Test.csproj", "{EE78D23C-D46C-4E43-B427-E51F86D619AF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0928C647-26B7-422A-80FC-DC4292E187B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +29,6 @@ Global
 		{FF9A9A24-7422-4FE3-BEA7-5646A1CB0709}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF9A9A24-7422-4FE3-BEA7-5646A1CB0709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF9A9A24-7422-4FE3-BEA7-5646A1CB0709}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25D155C9-BE59-407E-B7C3-ADDA6B1A6AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25D155C9-BE59-407E-B7C3-ADDA6B1A6AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25D155C9-BE59-407E-B7C3-ADDA6B1A6AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25D155C9-BE59-407E-B7C3-ADDA6B1A6AE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59937EDC-861D-4445-9BC4-79B97488FE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59937EDC-861D-4445-9BC4-79B97488FE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59937EDC-861D-4445-9BC4-79B97488FE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59937EDC-861D-4445-9BC4-79B97488FE24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE78D23C-D46C-4E43-B427-E51F86D619AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE78D23C-D46C-4E43-B427-E51F86D619AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE78D23C-D46C-4E43-B427-E51F86D619AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE78D23C-D46C-4E43-B427-E51F86D619AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
