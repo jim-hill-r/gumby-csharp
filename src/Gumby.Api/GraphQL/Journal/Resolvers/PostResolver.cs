@@ -12,11 +12,10 @@ namespace Gumby.Api.GraphQL.Journal.Resolvers
             _gremlinClient = gremlinClient;
         }
 
+        private static readonly string GetPostsQuery = "g.V().hasLabel('post')";
         public IReadOnlyList<Post> GetPosts()
         {
-            string query = "g.V().hasLabel('post')";
-
-            var results = _gremlinClient.SubmitAsync<dynamic>(query).Result;
+            var results = _gremlinClient.SubmitAsync<dynamic>(GetPostsQuery).Result;
 
             return new List<Post>()
             {

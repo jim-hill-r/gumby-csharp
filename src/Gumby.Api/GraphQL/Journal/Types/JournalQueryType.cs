@@ -1,5 +1,6 @@
 ﻿using Gumby.Api.GraphQL.Journal.Resolvers;
 using HotChocolate.Types;
+using HotChocolate.Types.Relay;
 
 namespace Gumby.Api.GraphQL.Journal.Types
 {
@@ -7,8 +8,8 @@ namespace Gumby.Api.GraphQL.Journal.Types
     {
         protected override void Configure(IObjectTypeDescriptor<JournalQuery> descriptor)
         {
-            descriptor.Field<PostResolver>(t => t.GetPosts())
-                .Type<PostType>();
+            descriptor.Field<PostResolver>(r => r.GetPosts())
+                .Name("posts");
         }
         
     }

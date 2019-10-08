@@ -1,5 +1,6 @@
 ﻿using Gremlin.Net.Driver;
 using Gremlin.Net.Structure.IO.GraphSON;
+using Gumby.Api.GraphQL;
 using Gumby.Api.GraphQL.Journal.Resolvers;
 using Gumby.Api.GraphQL.Journal.Types;
 using HotChocolate;
@@ -26,11 +27,8 @@ namespace Gumby.Api
             var gremlinClient = new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
             services.AddSingleton<IGremlinClient>(gremlinClient);
 
-            services.AddGraphQL(sp => SchemaBuilder.New()
+            services.AddGraphQL(sp => SchemaFactory.JournalSchema()
                 .AddServices(sp)
-                .AddQueryType<JournalQueryType>()
-                .AddMutationType<JournalMutationType>()
-                .AddType<PostType>()
                 .Create(),
                 new QueryExecutionOptions
                 {
