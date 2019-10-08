@@ -21,8 +21,8 @@ namespace Gumby.Api
 
         private void ConfigureServices(IServiceCollection services)
         {
-            var gremlinServer = new GremlinServer("gumby.gremlin.cosmos.azure.com", 443, enableSsl: true,
-                                                username: "/dbs/gumbydb/colls/gumbyGraph",
+            var gremlinServer = new GremlinServer("localhost", 8081, enableSsl: false,
+                                                username: "/dbs/gumbydb/colls/gumbygraph",
                                                 password: "");
             var gremlinClient = new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
             services.AddSingleton<IGremlinClient>(gremlinClient);

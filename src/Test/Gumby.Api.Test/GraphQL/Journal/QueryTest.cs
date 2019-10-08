@@ -31,13 +31,13 @@ namespace Gumby.Api.Test
         public async Task PostQueryTest()
         {
             string queryText =
-                @"{
+                @"query GetPosts{
                     posts{
                         text       
                     }
                 }";
 
-            var queryRequest = QueryRequestBuilder.New().SetServices(_serviceProvider).SetQuery(queryText).AddProperty("Key", "value").Create();
+            var queryRequest = QueryRequestBuilder.New().SetServices(_serviceProvider).SetQuery(queryText).Create();
             IExecutionResult result = await _executor.ExecuteAsync(queryRequest);
             Assert.NotNull(result);
             Assert.Equal(0, result.Errors.Count);

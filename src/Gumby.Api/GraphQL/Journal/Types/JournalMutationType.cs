@@ -7,7 +7,8 @@ namespace Gumby.Api.GraphQL.Journal.Types
     {
         protected override void Configure(IObjectTypeDescriptor<JournalMutation> descriptor)
         {
-            descriptor.Field<PostResolver>(t => t.GetPosts());
+            descriptor.Field<PostResolver>(r => r.CreatePostAsync())
+                .Name("createPost");
         }
     }
 }
