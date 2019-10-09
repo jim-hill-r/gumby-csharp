@@ -23,7 +23,7 @@ namespace Gumby.Api
         {
             var gremlinServer = new GremlinServer("localhost", 8081, enableSsl: false,
                                                 username: "/dbs/gumbydb/colls/gumbygraph",
-                                                password: "");
+                                                password: "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
             var gremlinClient = new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
             services.AddSingleton<IGremlinClient>(gremlinClient);
 
