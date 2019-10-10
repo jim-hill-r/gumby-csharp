@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Gumby.App\Gumby.App.csproj" />
+    <ProjectReference Include="..\..\..\Src\Gumby.App\Gumby.App.csproj" />
   </ItemGroup>
 
 </Project>

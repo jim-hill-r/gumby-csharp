@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Gumby.Api\Gumby.Api.csproj" />
+    <ProjectReference Include="..\..\..\Src\Gumby.Api\Gumby.Api.csproj" />
   </ItemGroup>
 
 </Project>

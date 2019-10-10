@@ -3,7 +3,7 @@ using System;
 using System.Net.Http;
 using Xunit;
 
-namespace Gumby.App.Test
+namespace Gumby.Test.Unit.App
 {
     public class FetchJournalEffectTest
     {

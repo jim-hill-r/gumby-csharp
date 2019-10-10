@@ -5,17 +5,19 @@ using HotChocolate.Execution;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using Xunit;
+using System.Collections.Generic;
 
-namespace Gumby.Api.Test
+namespace Gumby.Test.Unit.Api
 {
-    public class MutationTest
+    public class QueryTest
     {
         private readonly IQueryExecutor _executor;
         private readonly IServiceProvider _serviceProvider;
 
-        public MutationTest()
+        public QueryTest()
         {
             _executor = SchemaFactory.JournalSchema().Create().MakeExecutable();
 
@@ -26,31 +28,33 @@ namespace Gumby.Api.Test
         }
 
         [Fact]
-        public async Task NewPostMutationTest()
+        public async Task PostQueryTest()
         {
-            string mutationText =
-                @"mutation CreatePost {
-                    createPost {
-                        id
-                        text
+            string queryText =
+                @"query GetPosts{
+                    posts{
+                        text       
                     }
                 }";
 
-            var queryRequest = QueryRequestBuilder.New().SetServices(_serviceProvider).SetQuery(mutationText).Create();
+            var queryRequest = QueryRequestBuilder.New().SetServices(_serviceProvider).SetQuery(queryText).Create();
             IExecutionResult result = await _executor.ExecuteAsync(queryRequest);
             Assert.NotNull(result);
             Assert.Equal(0, result.Errors.Count);
 
             var data = ((IReadOnlyQueryResult)result).Data;
             Assert.Equal(1, data.Count);
-            Assert.True(data.ContainsKey("createPost"));
+            Assert.True(data.ContainsKey("posts"));
 
-            object postObject = null;
-            Assert.True(data.TryGetValue("createPost", out postObject));
-            var post = (OrderedDictionary)postObject;
-            Assert.Equal(2, post.Keys.Count);
-            Assert.True(post.ContainsKey("id"));
-            Assert.True(post.ContainsKey("text"));
+            object postsObject = null;
+            Assert.True(data.TryGetValue("posts", out postsObject));
+            var posts = (IEnumerable)postsObject;
+            foreach (var post in posts)
+            {
+                var postDictionary = (OrderedDictionary)post;
+                Assert.Equal(1, postDictionary.Keys.Count);
+                Assert.True(postDictionary.ContainsKey("text"));
+            }
         }
     }
 }
