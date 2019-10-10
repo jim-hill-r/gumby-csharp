@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Gumby.Graph
 {
@@ -13,12 +14,23 @@ namespace Gumby.Graph
             _gremlinClient = gremlinClient;
         }
         
-        public T AddVertex<T>(T vertex)
+        public async Task<Guid> AddVertexAsync<T>(T vertex) where T : IVertex
         {
-            throw new NotImplementedException();
+            var queryBuilder = new StringBuilder();
+            queryBuilder.Append($"g");
+            queryBuilder.Append($".addV('{vertex.Label}'");
+            queryBuilder.Append($".property('id','{vertex.Id}'");
+            queryBuilder.Append($".property('partitionKey','{vertex.Partition}'");
+            foreach(string key in vertex.Properties.Keys)
+            {
+                queryBuilder.Append($".property('{key}','{vertex.Properties[key]}'");
+            }
+                        
+            var result = await _gremlinClient.SubmitAsync<dynamic>(queryBuilder.ToString());
+            return vertex.Id;
         }
 
-        public T AddEdge<T>(T edge)
+        public async Task<Guid> AddEdgeAsync<T>(T edge) where T : IEdge
         {
             throw new NotImplementedException();
         }
