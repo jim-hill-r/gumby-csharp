@@ -34,4 +34,7 @@
     <Folder Include="gRPC\" />
     <Folder Include="REST\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gumby.Graph\Gumby.Graph.csproj" />
+  </ItemGroup>
 </Project>
