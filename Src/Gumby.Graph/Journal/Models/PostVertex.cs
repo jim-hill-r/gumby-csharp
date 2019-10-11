@@ -15,7 +15,10 @@ namespace Gumby.Graph.Journal.Models
             get
             {
                 var properties = new Dictionary<string, string>();
-                properties.Add("text", Text);
+                if (!string.IsNullOrWhiteSpace(Text))
+                {
+                    properties.Add("text", Text);
+                }
                 return properties;
             }
         }

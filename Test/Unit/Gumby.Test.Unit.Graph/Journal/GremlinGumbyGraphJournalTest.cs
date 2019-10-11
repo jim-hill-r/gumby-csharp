@@ -1,5 +1,6 @@
 using Gremlin.Net.Driver;
 using Gremlin.Net.Structure.IO.GraphSON;
+using Gumby.Graph.Journal.Models;
 using System;
 using Xunit;
 
@@ -20,6 +21,10 @@ namespace Gumby.Test.Unit.Graph.Journal
         [Fact]
         public void AddVertexTest()
         {
+            var testVertex = new PostVertex()
+            { 
+                
+            };
 
         }
     }
