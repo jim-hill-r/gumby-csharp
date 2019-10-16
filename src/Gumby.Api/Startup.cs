@@ -4,6 +4,7 @@ using Gumby.Api.GraphQL;
 using Gumby.Api.GraphQL.Journal.Resolvers;
 using Gumby.Api.GraphQL.Journal.Types;
 using Gumby.Graph;
+using Gumby.Graph.Cosmos;
 using HotChocolate;
 using HotChocolate.Execution.Configuration;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
@@ -28,7 +29,7 @@ namespace Gumby.Api
             var gremlinClient = new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
             services.AddSingleton<IGremlinClient>(gremlinClient);
 
-            services.AddSingleton<IGumbyGraph, GremlinGumbyGraph>();
+            services.AddSingleton<IGumbyGraph, CosmosGumbyGraph>();
             services.AddGraphQL(sp => SchemaFactory.JournalSchema()
                 .AddServices(sp)
                 .Create(),

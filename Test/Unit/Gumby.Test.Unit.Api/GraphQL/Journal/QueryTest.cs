@@ -1,5 +1,5 @@
-using Gremlin.Net.Driver;
 using Gumby.Api.GraphQL;
+using Gumby.Graph;
 using HotChocolate;
 using HotChocolate.Execution;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +8,6 @@ using System;
 using System.Collections;
 using System.Threading.Tasks;
 using Xunit;
-using System.Collections.Generic;
 
 namespace Gumby.Test.Unit.Api
 {
@@ -21,9 +20,9 @@ namespace Gumby.Test.Unit.Api
         {
             _executor = SchemaFactory.JournalSchema().Create().MakeExecutable();
 
-            var gremlinClientMock = new Mock<IGremlinClient>();
+            var gumbyGraphMock = new Mock<IGumbyGraph>();
             _serviceProvider = new ServiceCollection()
-                .AddSingleton(gremlinClientMock.Object)
+                .AddSingleton(gumbyGraphMock.Object)
                 .BuildServiceProvider();
         }
 

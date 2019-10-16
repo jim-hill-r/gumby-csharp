@@ -1,5 +1,5 @@
-using Gremlin.Net.Driver;
 using Gumby.Api.GraphQL;
+using Gumby.Graph;
 using HotChocolate;
 using HotChocolate.Execution;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +19,9 @@ namespace Gumby.Test.Unit.Api
         {
             _executor = SchemaFactory.JournalSchema().Create().MakeExecutable();
 
-            var gremlinClientMock = new Mock<IGremlinClient>();
+            var gumbyGraphMock = new Mock<IGumbyGraph>();
             _serviceProvider = new ServiceCollection()
-                .AddSingleton(gremlinClientMock.Object)
+                .AddSingleton(gumbyGraphMock.Object)
                 .BuildServiceProvider();
         }
 
@@ -30,10 +30,7 @@ namespace Gumby.Test.Unit.Api
         {
             string mutationText =
                 @"mutation CreatePost {
-                    createPost {
-                        id
-                        text
-                    }
+                    createPost
                 }";
 
             var queryRequest = QueryRequestBuilder.New().SetServices(_serviceProvider).SetQuery(mutationText).Create();
@@ -47,10 +44,7 @@ namespace Gumby.Test.Unit.Api
 
             object postObject = null;
             Assert.True(data.TryGetValue("createPost", out postObject));
-            var post = (OrderedDictionary)postObject;
-            Assert.Equal(2, post.Keys.Count);
-            Assert.True(post.ContainsKey("id"));
-            Assert.True(post.ContainsKey("text"));
+            Assert.True(postObject is Guid);
         }
     }
 }

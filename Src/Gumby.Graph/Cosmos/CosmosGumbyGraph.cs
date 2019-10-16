@@ -1,20 +1,17 @@
 ﻿using Gremlin.Net.Driver;
-using Gremlin.Net.Driver.Remote;
-using Gremlin.Net.Process.Traversal;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Gumby.Graph.Cosmos
 {
-    public class CosmoGumbyGraph : IGumbyGraph
+    public class CosmosGumbyGraph : IGumbyGraph
     {
         private static readonly string PARTITION_KEY = "partitionKey";
         private static readonly string ID_KEY = "id";
 
         private IGremlinClient _gremlinClient;
-        public CosmoGumbyGraph(IGremlinClient gremlinClient)
+        public CosmosGumbyGraph(IGremlinClient gremlinClient)
         {
             _gremlinClient = gremlinClient;
         }
@@ -33,17 +30,18 @@ namespace Gumby.Graph.Cosmos
                 if(o is IVertex)
                 {
                     var vertex = (IVertex)o;
-                    queryBuilder.Append($".addV('{vertex.Label}'");
-                    queryBuilder.Append($".property('{ID_KEY}','{vertex.Id}'");
-                    queryBuilder.Append($".property('{PARTITION_KEY}','{vertex.Partition}'");
+                    queryBuilder.Append($".addV('{vertex.Label}')");
+                    queryBuilder.Append($".property('{ID_KEY}','{vertex.Id}')");
+                    queryBuilder.Append($".property('{PARTITION_KEY}','{vertex.Partition}')");
                     foreach (string key in vertex.Properties.Keys)
                     {
-                        queryBuilder.Append($".property('{key}','{vertex.Properties[key]}'");
+                        queryBuilder.Append($".property('{key}','{vertex.Properties[key]}')");
                     }
                 }
             }
 
             var result = await _gremlinClient.SubmitAsync<dynamic>(queryBuilder.ToString());
+            
         }
     }
 }

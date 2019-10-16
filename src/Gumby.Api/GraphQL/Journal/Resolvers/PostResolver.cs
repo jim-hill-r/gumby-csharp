@@ -42,9 +42,12 @@ namespace Gumby.Api.GraphQL.Journal.Resolvers
                 Id = newId
             };
 
-            var savedId = await _gumbyGraph.AddVertexAsync(postVertex);
+            var query = new GumbyGraphWriteQueryBuilder()
+                .AddVertex(postVertex)
+                .Build();
+            await _gumbyGraph.WriteAsync(query);
            
-            return savedId;
+            return newId;
         }
     }
 }
