@@ -11,11 +11,13 @@ namespace Gumby.App.Climb.Journal.Store
 {
     public class FetchJournalEffect : Effect<FetchJournalAction>
     {
-        private readonly HttpClient HttpClient;
+        private readonly HttpClient _httpClient;
+        private readonly IEndpointProvider _endpointProvider;
 
-        public FetchJournalEffect(HttpClient httpClient)
+        public FetchJournalEffect(HttpClient httpClient, IEndpointProvider endpointProvider)
         {
-            HttpClient = httpClient;
+            _httpClient = httpClient;
+            _endpointProvider = endpointProvider;
         }
 
         protected async override Task HandleAsync(FetchJournalAction action, IDispatcher dispatcher)
@@ -27,12 +29,12 @@ namespace Gumby.App.Climb.Journal.Store
                  }
                 }";
 
-            Uri uri = new Uri(Endpoints.GraphQLAPI);
+            Uri uri = new Uri(_endpointProvider.GraphQLAPI);
             HttpContent httpContent = new StringContent(requestBody, Encoding.UTF8);          
 
             try
             {
-                var response = await HttpClient.PostAsync(uri,httpContent);
+                var response = await _httpClient.PostAsync(uri,httpContent);
                 if(response.Content != null)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();

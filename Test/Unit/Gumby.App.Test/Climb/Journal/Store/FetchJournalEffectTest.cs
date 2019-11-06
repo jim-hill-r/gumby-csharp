@@ -1,3 +1,4 @@
+using Gumby.App;
 using Gumby.App.Climb.Journal.Store;
 using System;
 using System.Net.Http;
@@ -11,7 +12,8 @@ namespace Gumby.Test.Unit.App
         public void HandleReturnsPosts()
         {
             HttpClient httpClient = new HttpClient();
-            var fetchJournalEffect = new FetchJournalEffect(httpClient);
+            IEndpointProvider endpointProvider = new EndpointProvider();
+            var fetchJournalEffect = new FetchJournalEffect(httpClient,endpointProvider);
 
 
         }

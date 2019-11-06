@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Gumby.App
 {
-    public static class Endpoints
+    public interface IEndpointProvider
     {
-        public static string GraphQLAPI = "http://localhost:7071/api/gql";
+        string GraphQLAPI { get; }
     }
 }

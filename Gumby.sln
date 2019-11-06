@@ -56,6 +56,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.App.Test", "Test\Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gumby.Graph.Test", "Test\Unit\Gumby.Graph.Test\Gumby.Graph.Test.csproj", "{CCAC5301-1902-429C-BE64-83384E35C3E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manual", "Manual", "{7C3346E7-8FBB-412F-B50D-AD337BD2C2A6}"
+	ProjectSection(SolutionItems) = preProject
+		Test\Manual\StartAPI.ps1 = Test\Manual\StartAPI.ps1
+		Test\Manual\StartApp.ps1 = Test\Manual\StartApp.ps1
+		Test\Manual\StartCosmos.ps1 = Test\Manual\StartCosmos.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +115,7 @@ Global
 		{FC69CBB9-6BA9-4749-B533-5910B0EF2E38} = {BE243D6D-5338-4084-985E-1DE30AD25E21}
 		{34F00F08-E079-4BE3-B9DB-C79BC394E43B} = {BE243D6D-5338-4084-985E-1DE30AD25E21}
 		{CCAC5301-1902-429C-BE64-83384E35C3E1} = {BE243D6D-5338-4084-985E-1DE30AD25E21}
+		{7C3346E7-8FBB-412F-B50D-AD337BD2C2A6} = {0928C647-26B7-422A-80FC-DC4292E187B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {493C8851-CAC5-4466-BD64-38964B22DCF5}

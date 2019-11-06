@@ -11,6 +11,7 @@ namespace Gumby.App
             services.AddFluxor(options => options
                 .UseDependencyInjection(typeof(Startup).Assembly)
             );
+            services.AddSingleton<IEndpointProvider, EndpointProvider>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

@@ -8,11 +8,13 @@ namespace Gumby.App.Climb.Journal.Store
 {
     public class AddJournalEffect : Effect<AddJournalAction>
     {
-        private readonly HttpClient HttpClient;
+        private readonly HttpClient _httpClient;
+        private readonly IEndpointProvider _endpointProvider;
 
-        public AddJournalEffect(HttpClient httpClient)
+        public AddJournalEffect(HttpClient httpClient, IEndpointProvider endpointProvider)
         {
-            HttpClient = httpClient;
+            _httpClient = httpClient;
+            _endpointProvider = endpointProvider;
         }
 
         protected async override Task HandleAsync(AddJournalAction action, IDispatcher dispatcher)
@@ -26,7 +28,7 @@ namespace Gumby.App.Climb.Journal.Store
                     Text = action.Name,
                     OccurredAt = action.OccurredAt ?? DateTime.UtcNow
                 };
-                await HttpClient.PostAsync(Endpoints.GraphQLAPI, httpContent);
+                await _httpClient.PostAsync(_endpointProvider.GraphQLAPI, httpContent);
             }
             catch
             {

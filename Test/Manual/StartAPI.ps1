@@ -1,0 +1,1 @@
+& 'C:\Users\jimhi\AppData\Local\AzureFunctionsTools\Releases\2.42.0\cli\func.exe' start --script-root '../../Src/Gumby.Api/bin/Debug/netcoreapp3.0'
