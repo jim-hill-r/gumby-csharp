@@ -10,7 +10,7 @@ namespace Gumby.Test.Unit.Graph.Journal
 {
     public class GremlinGumbyGraphJournalTest
     {
-        private readonly IGumbyGraph _gumbyGraph;
+        private readonly IGumbyGraphWriter _gumbyGraphWriter;
 
         public GremlinGumbyGraphJournalTest()
         {
@@ -18,7 +18,7 @@ namespace Gumby.Test.Unit.Graph.Journal
                                                 username: "/dbs/gumbydb/colls/gumbygraph",
                                                 password: "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
             var gremlinClient = new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
-            _gumbyGraph = new CosmosGumbyGraph(gremlinClient);
+            _gumbyGraphWriter = new CosmosGumbyGraph(gremlinClient);
         }
         [Fact]
         public void AddVertexTest()
@@ -29,10 +29,7 @@ namespace Gumby.Test.Unit.Graph.Journal
                 Text = "Test Text"
             };
 
-            var queryBuilder = new GumbyGraphWriteQueryBuilder();
-            queryBuilder.AddVertex(testVertex);
-            IGumbyGraphWriteRequest testQuery = queryBuilder.Build();
-            _gumbyGraph.WriteAsync(testQuery);
+            _gumbyGraphWriter.CreateVertexAsync(testVertex);
         }
     }
 }

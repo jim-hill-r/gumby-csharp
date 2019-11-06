@@ -1,10 +1,10 @@
 ﻿using Gremlin.Net.Driver;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Gumby.Api.GraphQL;
-using Gumby.Api.GraphQL.Journal.Resolvers;
-using Gumby.Api.GraphQL.Journal.Types;
 using Gumby.Graph;
 using Gumby.Graph.Cosmos;
+using Gumby.Mutation;
+using Gumby.Mutation.Cosmos;
 using HotChocolate;
 using HotChocolate.Execution.Configuration;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
@@ -28,8 +28,9 @@ namespace Gumby.Api
                                                 password: "");
             var gremlinClient = new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
             services.AddSingleton<IGremlinClient>(gremlinClient);
-
             services.AddSingleton<IGumbyGraph, CosmosGumbyGraph>();
+            services.AddSingleton<IMutationRepository, CosmosMutationRepository>();
+
             services.AddGraphQL(sp => SchemaFactory.JournalSchema()
                 .AddServices(sp)
                 .Create(),

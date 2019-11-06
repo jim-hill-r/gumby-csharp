@@ -3,17 +3,17 @@ using Gumby.Graph;
 using Gumby.Graph.Journal.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gumby.Api.GraphQL.Journal.Resolvers
 {
-    public class PostResolver
+    public class PostQueryResolver
     {
-        IGumbyGraph _gumbyGraph;
-        public PostResolver(IGumbyGraph gumbyGraph)
+        IGumbyGraph _gumbyGraphReader;
+
+        public PostQueryResolver(IGumbyGraph gumbyGraphReader)
         {
-            _gumbyGraph = gumbyGraph;
+            _gumbyGraphReader = gumbyGraphReader;
         }
 
         public async Task<Post> GetPostAsync(Guid id)
@@ -31,23 +31,6 @@ namespace Gumby.Api.GraphQL.Journal.Resolvers
                 }
 
             };
-        }
-
-        
-        public async Task<Guid> CreatePostAsync()
-        {
-            var newId = Guid.NewGuid();
-            var postVertex = new PostVertex()
-            {
-                Id = newId
-            };
-
-            var query = new GumbyGraphWriteQueryBuilder()
-                .AddVertex(postVertex)
-                .Build();
-            await _gumbyGraph.WriteAsync(query);
-           
-            return newId;
         }
     }
 }

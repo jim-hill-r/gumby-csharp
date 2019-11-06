@@ -1,5 +1,6 @@
 using Gumby.Api.GraphQL;
 using Gumby.Graph;
+using Gumby.Mutation;
 using HotChocolate;
 using HotChocolate.Execution;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +20,9 @@ namespace Gumby.Test.Unit.Api
         {
             _executor = SchemaFactory.JournalSchema().Create().MakeExecutable();
 
-            var gumbyGraphMock = new Mock<IGumbyGraph>();
+            var mutationRepositoryMock = new Mock<IMutationRepository>();
             _serviceProvider = new ServiceCollection()
-                .AddSingleton(gumbyGraphMock.Object)
+                .AddSingleton(mutationRepositoryMock.Object)
                 .BuildServiceProvider();
         }
 

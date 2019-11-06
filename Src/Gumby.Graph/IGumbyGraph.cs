@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Gumby.Graph.Journal.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace Gumby.Graph
 {
     public interface IGumbyGraph
     {
-        Task<T> ReadAsync<T>(IGumbyGraphReadRequest query);
-        Task WriteAsync(IGumbyGraphWriteRequest query);
+        Task<T> GetVertexAsync<T>(Guid id);
     }
 }

@@ -20,9 +20,9 @@ namespace Gumby.Test.Unit.Api
         {
             _executor = SchemaFactory.JournalSchema().Create().MakeExecutable();
 
-            var gumbyGraphMock = new Mock<IGumbyGraph>();
+            var gumbyGraphReaderMock = new Mock<IGumbyGraph>();
             _serviceProvider = new ServiceCollection()
-                .AddSingleton(gumbyGraphMock.Object)
+                .AddSingleton(gumbyGraphReaderMock.Object)
                 .BuildServiceProvider();
         }
 
