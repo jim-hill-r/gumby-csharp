@@ -9,6 +9,7 @@ using HotChocolate;
 using HotChocolate.Execution.Configuration;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 [assembly: FunctionsStartup(typeof(Gumby.Api.Startup))]
 
@@ -23,13 +24,23 @@ namespace Gumby.Api
 
         private void ConfigureServices(IServiceCollection services)
         {
-            var gremlinServer = new GremlinServer("localhost", 8091, enableSsl: false,
+            var gremlinHost = Environment.GetEnvironmentVariable("gremlinHost");
+            var gremlinPort = int.Parse(Environment.GetEnvironmentVariable("gremlinPort"));
+            var gremlinEnableSsl = bool.Parse(Environment.GetEnvironmentVariable("gremlinSsl"));
+            var gremlinPassword = Environment.GetEnvironmentVariable("gremlinPassword");
+
+            var gumbyGraphGremlinServer = new GremlinServer(gremlinHost, gremlinPort, enableSsl: gremlinEnableSsl,
                                                 username: "/dbs/gumbydb/colls/gumbygraph",
-                                                password: "");
-            var gremlinClient = new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
-            services.AddSingleton<IGremlinClient>(gremlinClient);
-            services.AddSingleton<IGumbyGraph, CosmosGumbyGraph>();
-            services.AddSingleton<IMutationRepository, CosmosMutationRepository>();
+                                                password: gremlinPassword);
+            var gumbyGraphGremlinClient = new GremlinClient(gumbyGraphGremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
+            services.AddSingleton<IGumbyGraph>(new CosmosGumbyGraph(gumbyGraphGremlinClient));
+
+            var mutationRepositoryGremlinServer = new GremlinServer(gremlinHost, gremlinPort, enableSsl: gremlinEnableSsl,
+                                                username: "/dbs/gumbydb/colls/mutation",
+                                                password: gremlinPassword);
+            var mutationRepositoryGremlinClient = new GremlinClient(mutationRepositoryGremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
+            services.AddSingleton<IGumbyGraph>(new CosmosGumbyGraph(gumbyGraphGremlinClient));
+            services.AddSingleton<IMutationRepository>(new CosmosMutationRepository(mutationRepositoryGremlinClient));
 
             services.AddGraphQL(sp => SchemaFactory.JournalSchema()
                 .AddServices(sp)
