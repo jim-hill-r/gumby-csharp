@@ -1,5 +1,4 @@
-﻿using Gumby.Graph.Journal.Models;
-using Gumby.Mutation;
+﻿using Gumby.Mutation;
 using Gumby.Mutation.Journal.Models;
 using System;
 using System.Threading.Tasks;

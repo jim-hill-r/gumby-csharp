@@ -1,6 +1,5 @@
 ﻿using Gumby.Api.GraphQL.Journal.Models;
 using Gumby.Graph;
-using Gumby.Graph.Journal.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,11 +8,11 @@ namespace Gumby.Api.GraphQL.Journal.Resolvers
 {
     public class PostQueryResolver
     {
-        IGumbyGraph _gumbyGraphReader;
+        IGumbyGraph _gumbyGraph;
 
-        public PostQueryResolver(IGumbyGraph gumbyGraphReader)
+        public PostQueryResolver(IGumbyGraph gumbyGraph)
         {
-            _gumbyGraphReader = gumbyGraphReader;
+            _gumbyGraph = gumbyGraph;
         }
 
         public async Task<Post> GetPostAsync(Guid id)

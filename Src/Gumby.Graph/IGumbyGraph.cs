@@ -1,5 +1,4 @@
-﻿using Gumby.Graph.Journal.Models;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace Gumby.Graph

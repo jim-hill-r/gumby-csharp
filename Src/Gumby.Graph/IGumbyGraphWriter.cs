@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Gumby.Graph
 {
-    public interface IGumbyGraphWriter
+    internal interface IGumbyGraphWriter
     {
         Task CreateVertexAsync<T>(T vertex) where T:IVertex;
         Task UpdateVertexAsync<T>(T vertex) where T:IVertex;

@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Azure.Documents;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.Logging;
+//using Microsoft.Azure.Documents;
+//using Microsoft.Azure.WebJobs;
+//using Microsoft.Azure.WebJobs.Host;
+//using Microsoft.Extensions.Logging;
 
 namespace Gumby.Graph.Mutation.Functions
 {
     public static class MutationFunction
     {
+        /*
         [FunctionName("Mutation")]
         public static void Run([CosmosDBTrigger(
             databaseName: "databaseName",
@@ -24,5 +25,6 @@ namespace Gumby.Graph.Mutation.Functions
 
             // Determine mutation and write to graph appropriately.
         }
+        */
     }
 }
