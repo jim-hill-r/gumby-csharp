@@ -15,9 +15,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Gremlin.Net" Version="3.4.4" />
-    <PackageReference Include="HotChocolate" Version="10.1.0" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="10.1.0" />
+    <PackageReference Include="HotChocolate" Version="10.2.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="10.2.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.CosmosDB" Version="3.0.5" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.29" />
   </ItemGroup>
   <ItemGroup>
