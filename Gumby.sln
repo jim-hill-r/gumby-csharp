@@ -60,7 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manual", "Manual", "{7C3346
 	ProjectSection(SolutionItems) = preProject
 		Test\Manual\StartAPI.ps1 = Test\Manual\StartAPI.ps1
 		Test\Manual\StartApp.ps1 = Test\Manual\StartApp.ps1
-		Test\Manual\StartCosmos.ps1 = Test\Manual\StartCosmos.ps1
+		Test\Manual\StartGraph.ps1 = Test\Manual\StartGraph.ps1
 	EndProjectSection
 EndProject
 Global

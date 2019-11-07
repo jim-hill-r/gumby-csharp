@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.Azure.Documents;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Gumby.Api.Functions
 {
     internal class GumbyGraphFunction
-    {
-        /*
+    { 
         [FunctionName("GumbyGraph")]
         public static void Run([CosmosDBTrigger(
             databaseName: "databaseName",
@@ -22,6 +22,6 @@ namespace Gumby.Api.Functions
 
             // Watch graph and if it updates, ensure to publish new results to graphQL subscribers
         }
-        */
+        
     }
 }

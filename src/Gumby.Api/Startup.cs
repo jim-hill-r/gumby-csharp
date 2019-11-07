@@ -32,7 +32,7 @@ namespace Gumby.Api
             var gumbyGraphGremlinServer = new GremlinServer(gremlinHost, gremlinPort, enableSsl: gremlinEnableSsl,
                                                 username: "/dbs/gumbydb/colls/gumbygraph",
                                                 password: gremlinPassword);
-            var gumbyGraphGremlinClient = new GremlinClient(gumbyGraphGremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
+             var gumbyGraphGremlinClient = new GremlinClient(gumbyGraphGremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
             services.AddSingleton<IGumbyGraph>(new CosmosGumbyGraph(gumbyGraphGremlinClient));
 
             var mutationRepositoryGremlinServer = new GremlinServer(gremlinHost, gremlinPort, enableSsl: gremlinEnableSsl,
